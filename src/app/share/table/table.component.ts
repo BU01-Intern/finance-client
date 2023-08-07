@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
-  @Input() products!: any[];
+  @Input() items!: any[];
   @Input() keys!: string[];
   @Input() colnames!: string[];
   dict: any = {};
@@ -14,6 +14,6 @@ export class TableComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.keys.forEach((key, i) => this.dict[key] = this.colnames[i]);
+    this.keys.forEach((key, i) => (this.dict[key] = this.colnames[i]));
   }
 }
