@@ -1,0 +1,45 @@
+<div class="layout-topbar" #containerElement>
+  <div class="layout-topbar-inner">
+    <button
+      type="button"
+      class="p-link menu-button"
+      (click)="onMenuButtonClick($event)"
+      aria-haspopup
+      aria-label="Menu"
+    >
+      <i class="pi pi-bars"></i>
+    </button>
+
+    <h2 class="title">Lorem ipsum</h2>
+
+    <ul class="flex list-none m-0 p-0 gap-2 align-items-center ml-auto">
+      <li>
+        <button
+          type="button"
+          class="flex p-link w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary"
+        >
+          <i class="pi pi-globe text-700" style="font-size: 1.3rem;"></i>
+        </button>
+      </li>
+      <li>
+        <button
+          type="button"
+          class="flex p-link w-2rem h-2rem surface-border border-round surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary"
+        >
+          <i class="pi pi-bell text-700" style="font-size: 1.3rem;"></i>
+        </button>
+      </li>
+      <li class="relative">
+        <div class="flex gap-1 align-items-center">
+          <span>Nguyen Tran Mai Anh</span>
+          <button
+            type="button"
+            class="avatar border-1 surface-border rounded-button surface-card align-items-center justify-content-center transition-all transition-duration-300 hover:border-primary"
+          >
+            <i class="pi pi-user text-700"></i>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

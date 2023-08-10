@@ -1,0 +1,21 @@
+<aside class="layout-sidebar" [ngClass]="{ active: active }">
+  <a [routerLink]="['/']" class="logo">
+    <img
+      alt="logo"
+      [src]="
+        'https://primefaces.org/cdn/primeng/images/' + 'primeng-logo-light.svg'
+      "
+      height="41"
+    />
+  </a>
+  <nav>
+    <ul class="layout-menu">
+      <li
+        *ngFor="let item of menu; let i = index"
+        app-menuitem
+        [item]="item"
+        [root]="true"
+      ></li>
+    </ul>
+  </nav>
+</aside>
