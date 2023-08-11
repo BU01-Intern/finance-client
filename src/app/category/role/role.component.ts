@@ -35,6 +35,10 @@ export class RoleComponent implements OnInit {
     this.numRows = this.roles.length;
   }
 
+  reloadTable(){
+    this.roles = this.roleService.getRolesList()
+    this.numRows = this.roles.length;
+  }
   getSeverity(status: boolean) {
     if (status) {
       return 'success'

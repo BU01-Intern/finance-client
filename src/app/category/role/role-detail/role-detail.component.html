@@ -4,24 +4,24 @@
         <p-divider></p-divider>
         <div class="flex flex-wrap justify-content-between">
             <div class="grid col-2">
-                <span class="col-6">Mã role</span>
-                <span class="col-6 w-max">{{role?.id}}</span>
+                <span class="md:col-6">Mã role</span>
+                <span class="md:col-6">{{role?.id}}</span>
             </div>
             <div class="grid col-3">
-                <span class="col-6">Role chức danh</span>
-                <div class="col-6 w-auto">
+                <span class="md:col-6">Role chức danh</span>
+                <div class="md:col-6">
                     <span>{{role?.titleRole}}</span>
                 </div>
             </div>
             <div class="grid col-4">
-                <span class="col-4">Roles dự án</span>
-                <div class="col-8 w-auto">
+                <span class="md:col-4">Roles dự án</span>
+                <div class="md:col-8">
                     <span>{{role?.projectRole}}</span>
                 </div>
             </div>
             <div class="grid col-3">
-                <span class="col-6">Trạng thái</span>
-                <span class="col-6 w-auto pt-1">
+                <span class="md:col-6">Trạng thái</span>
+                <span class="md:col-6 pt-1">
                     <p-tag class="pb-1" [value]="translateRoleStatus(role?.status)" [severity]="getSeverity(role?.status)"></p-tag>
                 </span>
             </div>

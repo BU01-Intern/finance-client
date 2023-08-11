@@ -12,6 +12,7 @@
                     <i class="pi pi-search"></i>
                     <input class="border-0 border-round-lg" (keydown.enter)="findRoles(filter.value)" type="text" pInputText placeholder="Tìm kiếm" #filter />
                     <i>
+                        <i (click)="reloadTable()" class="pi pi-replay mr-2"></i>
                         <i (click)="findRoles(filter.value)" class="pi-chevron-right pi"></i>
                     </i>
                 </div>
