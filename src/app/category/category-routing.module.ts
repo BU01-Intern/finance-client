@@ -4,6 +4,8 @@ import { CustomerDetailComponent } from './customer-detail/customer-detail.compo
 import { CustomerComponent } from './customer/customer.component';
 import { RoleComponent } from './role/role.component';
 import { RoleDetailComponent } from './role/role-detail/role-detail.component';
+import { StaffComponent } from './staff/staff.component';
+import { DetailComponent } from './staff/detail/detail.component';
 
 const routes: Routes = [
   {
@@ -55,7 +57,28 @@ const routes: Routes = [
           },
         ],
       },
-    
+      {
+        path: 'staff',
+        data: {
+          breadcrumb: 'Nhân sự',
+        },
+        children: [
+          {
+            path: '',
+            component: StaffComponent,
+            data: {
+              breadcrumb: null,
+            },
+          },
+          {
+            path: 'detail/:id',
+            component: DetailComponent,
+            data: {
+              breadcrumb: 'Chi tiết',
+            },
+          },
+        ],
+      },
     ],
   },
 ];

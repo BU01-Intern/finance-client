@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "name": "Text",
+      "name": "Danh mục",
       "icon": "pi pi-home",
       "children": [
         {
@@ -26,7 +26,7 @@
         },
         {
           "name": "Nhân sự",
-          "routerLink": "/staff"
+          "routerLink": "/category/staff"
         }
       ]
     },
