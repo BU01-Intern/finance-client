@@ -24,6 +24,20 @@ export class CostImplicationsComponent implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService
   ) {}
+  search() {
+    this.cost_implications = this.filtercost_implications(this.searchText);
+    this.numRows = this.cost_implications.length;
+  }
+  filtercost_implications(searchText: string): CostImplication[] {
+    searchText = searchText.toLowerCase();
+    return this.cost_implications.filter(
+      cost_implication =>
+        cost_implication &&
+        (cost_implication.khoan_muc && cost_implication.khoan_muc.toLowerCase().includes(searchText)) ||
+        (cost_implication.so_tai_khoan && cost_implication.so_tai_khoan.toLowerCase().includes(searchText)) ||
+        (cost_implication.loai_chi_phi && cost_implication.loai_chi_phi.toLowerCase().includes(searchText)) ||
+        (cost_implication.status && cost_implication.status.toLowerCase().includes(searchText))
+    );
   onClick() {
     this.clickMessage = 'You are my hero!';
   }
@@ -121,8 +135,8 @@ export class CostImplicationsComponent implements OnInit {
     return id;
   }
   exportToExcel() {
-    const fileName = 'danh-sach-khoan-muc-chi-phi.xlsx';
-    const sheetName = 'Danh sách khoản mục chi phí';
+    const fileso_tai_khoan = 'danh-sach-khoan-muc-chi-phi.xlsx';
+    const sheetso_tai_khoan = 'Danh sách khoản mục chi phí';
 
     const data: any[][] = [
       [
@@ -142,17 +156,17 @@ export class CostImplicationsComponent implements OnInit {
         cost_implication.so_tai_khoan,
         cost_implication.loai_chi_phi,
         cost_implication.loai_phan_bo,
-        this.getStatus(cost_implication.trang_thai ? cost_implication.trang_thai : 0 ),
+        this.getstatus(cost_implication.status ? cost_implication.status : 0 ),
       ]);
     });
 
     const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(data);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, sheetName);
-    XLSX.writeFile(wb, fileName);
+    XLSX.utils.book_append_sheet(wb, ws, sheetso_tai_khoan);
+    XLSX.writeFile(wb, fileso_tai_khoan);
   }
-  getStatus(trang_thai: number): string {
-    switch (trang_thai) {
+  getstatus(status: number): string {
+    switch (status) {
       case 0:
         return 'Không hoạt động';
 
@@ -165,8 +179,8 @@ export class CostImplicationsComponent implements OnInit {
         return '';
     }
   }
-  getSeverity(trang_thai: number) {
-    switch (trang_thai) {
+  getSeverity(status: number) {
+    switch (status) {
       case 0:
         return 'danger';
 
