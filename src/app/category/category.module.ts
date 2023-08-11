@@ -16,6 +16,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { FormsModule } from '@angular/forms';
+import { CategoryRoutingModule } from './category-routing.module';
+
 @NgModule({
   declarations: [
     CustomerDetailComponent,
@@ -23,6 +25,7 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    CategoryRoutingModule,
     CardModule,
     DividerModule,
     AvatarModule,

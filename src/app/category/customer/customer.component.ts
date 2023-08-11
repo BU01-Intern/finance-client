@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SortEvent } from 'primeng/api';
 import { Customer } from './Customer';
-import * as XLSX from 'xlsx'; 
+import * as XLSX from 'xlsx';
 
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
@@ -13,7 +13,7 @@ export class CustomerComponent implements OnInit {
   searchText: string = '';
   customers: Customer[] = [];
   numRows: Number = 0;
-  constructor(private router: Router) { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.customers = [
@@ -79,25 +79,23 @@ export class CustomerComponent implements OnInit {
   }
 
   routerLink(customer: Customer) {
-    this.router.navigate(['/customer/detail', customer.id]);
+    this.router.navigate(['detail', customer.id], { relativeTo: this.route });
   }
 
   search() {
     this.customers = this.filterCustomers(this.searchText);
     this.numRows = this.customers.length;
   }
-  
+
   filterCustomers(searchText: string): Customer[] {
     searchText = searchText.toLowerCase();
     return this.customers.filter(
       customer =>
-        customer && 
+        customer &&
         (customer.code && customer.code.toLowerCase().includes(searchText)) ||
         (customer.name && customer.name.toLowerCase().includes(searchText)) ||
         (customer.group && customer.group.toLowerCase().includes(searchText)) ||
         (customer.status && customer.status.toLowerCase().includes(searchText))
     );
   }
-  
-  
 }

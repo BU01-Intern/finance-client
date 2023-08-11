@@ -6,7 +6,7 @@
       "children": [
         {
           "name": "Khách hàng",
-          "routerLink": "/customer"
+          "routerLink": "/category/customer"
         },
         {
           "name": "Hợp đồng",

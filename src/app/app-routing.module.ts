@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
-import { CustomerDetailComponent } from './category/customer-detail/customer-detail.component';
-import { CustomerComponent } from './category/customer/customer.component';
 
 const routes: Routes = [
   {
@@ -13,26 +11,9 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'customer',
-        data: {
-          breadcrumb: 'Khách hàng',
-        },
-        children: [
-          {
-            path: '',
-            component: CustomerComponent,
-            data: {
-              breadcrumb: null,
-            },
-          },
-          {
-            path: 'detail/:id',
-            component: CustomerDetailComponent,
-            data: {
-              breadcrumb: 'Chi tiết',
-            },
-          },
-        ],
+        path: 'category',
+        loadChildren: () =>
+          import('./category/category.module').then((m) => m.CategoryModule),
       },
     ],
   },
