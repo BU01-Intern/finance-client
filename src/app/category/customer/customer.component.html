@@ -1,5 +1,5 @@
 <div>
-    <p-table [value]="customers" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="5"
+    <p-table [value]="customers" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="10"
         [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} trong số {totalRecords}"
         [rowsPerPageOptions]="[10, 25, 50]" [rowHover]="true">
         <ng-template pTemplate="caption">
@@ -8,7 +8,7 @@
                     <h2 class="flex align-items-end">Khách hàng<p-tag class="ml-1 mb-2">{{numRows}}</p-tag></h2>
                     <div class="p-input-icon-left p-input-icon-right">
                         <i class="pi pi-search"></i>
-                        <input type="text" pInputText placeholder="Tìm kiếm" />
+                        <input type="text" pInputText placeholder="Tìm kiếm" [(ngModel)]="searchText"/>
                         <i class="pi-chevron-right pi" (click)="search()"></i>
                     </div>
                 </div>

@@ -15,7 +15,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
-
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     CustomerDetailComponent,
@@ -36,6 +36,7 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
     CheckboxModule,
     RadioButtonModule,
     ScrollPanelModule,
+    FormsModule
   ],
   exports: [
     CustomerDetailComponent,
