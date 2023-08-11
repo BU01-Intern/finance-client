@@ -4,17 +4,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ShareModule } from './share/share.module';
+// import { ShareModule } from './share/share.module';
+import { TableModule } from 'primeng/table';
+import { CategoryModule } from './category/category.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ShareModule
+    CategoryModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

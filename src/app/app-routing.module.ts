@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-const routes: Routes = [];
+import { ContractComponent } from './category/contract/contract.component';
+import { TechnologyComponent } from './category/contract/technology/technology.component';
+const routes: Routes = [
+  {path : '', component: ContractComponent},
+  {path : 'Tech/:id', component: TechnologyComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
