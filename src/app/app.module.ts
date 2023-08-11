@@ -4,9 +4,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ShareModule } from './share/share.module';
+
 import { MainModule } from './main/main.module';
-import { CategoryModule } from './category/category.module';
+import { ShareModule } from './share/share.module';
 
 @NgModule({
   declarations: [
@@ -16,9 +16,8 @@ import { CategoryModule } from './category/category.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ShareModule,
     MainModule,
-    CategoryModule,
+    ShareModule
   ],
   providers: [],
   bootstrap: [AppComponent],

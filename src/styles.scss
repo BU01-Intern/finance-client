@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeflex/primeflex.scss";
@@ -180,6 +180,7 @@ a {
 
     .avatar {
       width: 2.5rem;
+      min-width: 2.5rem;
       height: 2.5rem;
       border-radius: 50%;
     }
@@ -194,9 +195,9 @@ a {
   .menu-button {
     display: none;
     color: var(--text-color);
-    width: 3rem;
-    min-width: 3rem;
-    height: 3rem;
+    width: 2.5rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
     background-color: var(--surface-card);
     border: 1px solid var(--surface-border);
     align-items: center;
@@ -209,7 +210,7 @@ a {
     }
 
     i {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
     }
   }
 }
@@ -370,7 +371,7 @@ a {
   padding-top: 5rem;
 
   .layout-content-inner {
-    padding: 2rem 4rem;
+    padding: 2rem 1rem;
   }
 
   .card {
@@ -389,13 +390,16 @@ a {
   }
 }
 
-.p-datatable .p-datatable-header {
+.p-datatable .p-datatable-header{
+  background: white;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  background-color: white;
   border: 0;
 }
 
+.border-round-2xl {
+  background: white;
+}
 
 .p-datatable-wrapper{
   overflow-x: scroll;
@@ -404,4 +408,13 @@ a {
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+.p-breadcrumb {
+  background: none;
+  border: none;
+}
+
+.p-breadcrumb .p-breadcrumb-chevron::before {
+  content: '\2022';
 }

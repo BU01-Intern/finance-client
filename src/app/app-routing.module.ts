@@ -4,16 +4,25 @@ import { MainComponent } from './main/main.component';
 import { DetailComponent } from './category/staff/detail/detail.component';
 import { StaffComponent } from './category/staff/staff.component';
 
-const routes: Routes = [{ path: '', component: MainComponent , children:[
-  {path:'staff', component: StaffComponent},
-  {path:'detail/:id', component: DetailComponent}
-]}];
+const routes: Routes = [
+  {
+    path: '',
+    component: MainComponent,
+    data: {
+      breadcrumb: null,
+    },
+    children: [
+      {
+        path: 'category',
+        loadChildren: () =>
+          import('./category/category.module').then((m) => m.CategoryModule),
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-  staff: StaffComponent | undefined;
-  
-}
+export class AppRoutingModule { }
