@@ -13,7 +13,6 @@ import * as XLSX from 'xlsx';
 export class CostImplicationsComponent implements OnInit {
   first: number = 0;
   rows: number = 10;
-
   clickMessage = '';
   costImplicationDialog: boolean = false;
   cost_implication!: CostImplication;
@@ -25,39 +24,6 @@ export class CostImplicationsComponent implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService
   ) {}
-
-  exportToExcel() {
-    const fileName = 'danh-sach-khoan-muc-chi-phi.xlsx';
-    const sheetName = 'Danh sách khoản mục chi phí';
-
-    const data: any[][] = [
-      [
-        '#',
-        'Khoản mục',
-        'Số tài khoản',
-        'Loại chi phí',
-        'Loại phân bổ',
-        'Trạng thái',
-      ],
-    ];
-
-    this.cost_implications.forEach((cost_implication, index) => {
-      data.push([
-        index + 1,
-        cost_implication.KM,
-        cost_implication.STK,
-        cost_implication.LCP,
-        cost_implication.LPB,
-        cost_implication.status,
-      ]);
-    });
-
-    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(data);
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, sheetName);
-    XLSX.writeFile(wb, fileName);
-  }
-
   onClick() {
     this.clickMessage = 'You are my hero!';
   }
@@ -81,21 +47,13 @@ export class CostImplicationsComponent implements OnInit {
     this.costImplicationDialog = false;
     this.submitted = false;
   }
-
-  // onUpload(event: any) {
-  //   for (let file of event.files) {
-  //     this.cost_implications.push(file);
-  //   }
-
-  //   this.messageService.add({
-  //     severity: 'info',
-  //     summary: 'File Uploaded',
-  //     detail: '',
-  //   });
-  // }
+  editCostImplications(cost_implication: CostImplication) {
+    this.cost_implication = { ...cost_implication };
+    this.costImplicationDialog = true;
+  }
   deletetCostImplications(cost_implication: CostImplication) {
     this.confirmationService.confirm({
-      message: 'Bạn có chắc chắn muốn xóa ' + cost_implication.KM + '?',
+      message: 'Bạn có chắc chắn muốn xóa ' + cost_implication.khoan_muc + '?',
       header: 'Xác nhận',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
@@ -112,15 +70,10 @@ export class CostImplicationsComponent implements OnInit {
       },
     });
   }
-  // Hàm mẫu để chỉnh sửa một sản phẩm
-  editCostImplications(cost_implication: CostImplication) {
-    this.cost_implication = { ...cost_implication };
-    this.costImplicationDialog = true;
-  }
   saveCostImplications() {
     this.submitted = true;
 
-    if (this.cost_implication.KM?.trim()) {
+    if (this.cost_implication.khoan_muc?.trim()) {
       if (this.cost_implication.id) {
         this.cost_implications[this.findIndexById(this.cost_implication.id)] =
           this.cost_implication;
@@ -167,8 +120,39 @@ export class CostImplicationsComponent implements OnInit {
     }
     return id;
   }
-  getStatus(status: number): string {
-    switch (status) {
+  exportToExcel() {
+    const fileName = 'danh-sach-khoan-muc-chi-phi.xlsx';
+    const sheetName = 'Danh sách khoản mục chi phí';
+
+    const data: any[][] = [
+      [
+        '#',
+        'Khoản mục',
+        'Số tài khoản',
+        'Loại chi phí',
+        'Loại phân bổ',
+        'Trạng thái',
+      ],
+    ];
+
+    this.cost_implications.forEach((cost_implication, index) => {
+      data.push([
+        index + 1,
+        cost_implication.khoan_muc,
+        cost_implication.so_tai_khoan,
+        cost_implication.loai_chi_phi,
+        cost_implication.loai_phan_bo,
+        this.getStatus(cost_implication.trang_thai ? cost_implication.trang_thai : 0 ),
+      ]);
+    });
+
+    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(data);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, sheetName);
+    XLSX.writeFile(wb, fileName);
+  }
+  getStatus(trang_thai: number): string {
+    switch (trang_thai) {
       case 0:
         return 'Không hoạt động';
 
@@ -181,8 +165,8 @@ export class CostImplicationsComponent implements OnInit {
         return '';
     }
   }
-  getSeverity(status: number) {
-    switch (status) {
+  getSeverity(trang_thai: number) {
+    switch (trang_thai) {
       case 0:
         return 'danger';
 

@@ -1,10 +1,9 @@
 export interface CostImplication {
   id?: string;
-  code?: string;
-  KM?: string;
-  STK?: string;
-  LCP?: string;
-  LPB?: string;
-  status?: number;
+  khoan_muc?: string;
+  so_tai_khoan?: string;
+  loai_chi_phi?: string;
+  loai_phan_bo?: string;
+  trang_thai?: number;
 }
 

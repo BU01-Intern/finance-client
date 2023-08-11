@@ -12,7 +12,7 @@
     [rowsPerPageOptions]="[10, 25, 50]"
     [showCurrentPageReport]="true"
     [lazy]="false"
-    [globalFilterFields]="['KM', 'STK', 'LCP', 'LPB', 'status']"
+    [globalFilterFields]="['khoan_muc', 'so_tai_khoan', 'loai_chi_phi', 'loai_phan_bo', 'trang_thai']"
   >
     <ng-template pTemplate="caption">
       <h3>
@@ -60,20 +60,20 @@
     <ng-template pTemplate="header" class="flex">
       <tr>
         <th>#</th>
-        <th pSortableColumn="KM" style="min-width: 12rem">
-          Khoản mục <p-sortIcon field="KM"></p-sortIcon>
+        <th pSortableColumn="khoan_muc" style="min-width: 12rem">
+          Khoản mục <p-sortIcon field="khoan_muc"></p-sortIcon>
         </th>
-        <th pSortableColumn="STK" style="min-width: 12em">
-          Số tài khoản <p-sortIcon field="STK"></p-sortIcon>
+        <th pSortableColumn="so_tai_khoan" style="min-width: 12em">
+          Số tài khoản <p-sortIcon field="so_tai_khoan"></p-sortIcon>
         </th>
-        <th pSortableColumn="LCP" style="min-width: 12rem">
-          Loại chi phí <p-sortIcon field="LCP"></p-sortIcon>
+        <th pSortableColumn="loai_chi_phi" style="min-width: 12rem">
+          Loại chi phí <p-sortIcon field="loai_chi_phi"></p-sortIcon>
         </th>
-        <th pSortableColumn="LPB" style="min-width: 12rem">
-          Loại phân bố <p-sortIcon field="LPB"></p-sortIcon>
+        <th pSortableColumn="loai_phan_bo" style="min-width: 12rem">
+          Loại phân bố <p-sortIcon field="loai_phan_bo"></p-sortIcon>
         </th>
-        <th pSortableColumn="status" style="min-width: 10rem">
-          Trạng thái<p-sortIcon field="inventoryStatus"></p-sortIcon>
+        <th pSortableColumn="trang_thai" style="min-width: 10rem">
+          Trạng thái<p-sortIcon field="trang_thai"></p-sortIcon>
         </th>
         <th>Thao tác</th>
       </tr>
@@ -81,14 +81,14 @@
     <ng-template pTemplate="body" let-cost_implication let-i="rowIndex">
       <tr>
         <td>{{ i + 1 }}</td>
-        <td>{{ cost_implication.KM }}</td>
-        <td>{{ cost_implication.STK }}</td>
-        <td>{{ cost_implication.LCP }}</td>
-        <td>{{ cost_implication.LPB }}</td>
+        <td>{{ cost_implication.khoan_muc }}</td>
+        <td>{{ cost_implication.so_tai_khoan }}</td>
+        <td>{{ cost_implication.loai_chi_phi }}</td>
+        <td>{{ cost_implication.loai_phan_bo}}</td>
         <td>
           <p-tag
-            [value]="getStatus(cost_implication.status)"
-            [severity]="getSeverity(cost_implication.status)"
+            [value]="getStatus(cost_implication.trang_thai)"
+            [severity]="getSeverity(cost_implication.trang_thai)"
           ></p-tag>
         </td>
 
@@ -121,77 +121,77 @@
 >
   <ng-template pTemplate="content">
     <div class="field">
-      <label for="KM">Khoản mục</label>
+      <label for="khoan_muc">Khoản mục</label>
       <input
         type="text"
         pInputText
-        id="KM"
-        [(ngModel)]="cost_implication.KM"
+        id="khoan_muc"
+        [(ngModel)]="cost_implication.khoan_muc"
         required
         autofocus
       />
-      <small class="p-error" *ngIf="submitted && !cost_implication.KM"
+      <small class="p-error" *ngIf="submitted && !cost_implication.khoan_muc"
         >Khoản mục là bắt buộc.</small
       >
     </div>
 
     <div class="field">
-      <label for="STK">Số tài khoản</label>
+      <label for="so_tai_khoan">Số tài khoản</label>
       <input
         type="text"
         pInputText
-        id="STK"
-        [(ngModel)]="cost_implication.STK"
+        id="so_tai_khoan"
+        [(ngModel)]="cost_implication.so_tai_khoan"
         required
         autofocus
       />
-      <small class="p-error" *ngIf="submitted && !cost_implication.STK"
+      <small class="p-error" *ngIf="submitted && !cost_implication.so_tai_khoan"
         >Số tài khoản là bắt buộc.</small
       >
     </div>
     <div class="field">
-      <label for="LCP">Loại chi phí</label>
+      <label for="loai_chi_phi">Loại chi phí</label>
       <input
         type="text"
         pInputText
-        id="LCP"
-        [(ngModel)]="cost_implication.LCP"
+        id="loai_chi_phi"
+        [(ngModel)]="cost_implication.loai_chi_phi"
         required
         autofocus
       />
-      <small class="p-error" *ngIf="submitted && !cost_implication.LCP"
+      <small class="p-error" *ngIf="submitted && !cost_implication.loai_chi_phi"
         >Loại chi phí là bắt buộc.</small
       >
     </div>
     <div class="field">
-      <label for="LPB">Loại phân bổ</label>
+      <label for="loai_phan_bo">Loại phân bổ</label>
       <input
         type="text"
         pInputText
-        id="LPB"
-        [(ngModel)]="cost_implication.LPB"
+        id="loai_phan_bo"
+        [(ngModel)]="cost_implication.loai_phan_bo"
         required
         autofocus
       />
-      <small class="p-error" *ngIf="submitted && !cost_implication.LPB"
+      <small class="p-error" *ngIf="submitted && !cost_implication.loai_phan_bo"
         >Loại phân bổ là bắt buộc.</small
       >
 
       <div class="field">
-        <label for="status">Trạng thái</label>
+        <label for="trang_thai">Trạng thái</label>
         <p-dropdown
-          [(ngModel)]="cost_implication.status"
-          inputId="status"
+          [(ngModel)]="cost_implication.trang_thai"
+          inputId="trang_thai"
           [options]="statuses"
         >
           <ng-template pTemplate="selectedItem">
             <p-tag
               [value]="
-                getStatus(cost_implication.status ? cost_implication.status : 0)
+                getStatus(cost_implication.trang_thai ? cost_implication.trang_thai : 0)
               "
               [severity]="
                 getSeverity(
-                  cost_implication.status ? cost_implication.status : 0
+                  cost_implication.trang_thai ? cost_implication.trang_thai : 0
                 )
               "
             ></p-tag>
