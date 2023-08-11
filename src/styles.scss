@@ -54,9 +54,10 @@ a {
       margin-bottom: 0.25rem;
     }
 
-    > li {
-      > button,
-      > a {
+    >li {
+
+      >button,
+      >a {
         display: flex;
         width: 100%;
         align-items: center;
@@ -91,13 +92,13 @@ a {
         }
       }
 
-      > div {
-        > ul {
+      >div {
+        >ul {
           margin: 0 0 0 1.5rem;
           padding: 0.25rem 0 0 0.5rem;
 
-          > li {
-            > ul {
+          >li {
+            >ul {
               margin-bottom: 1.5rem;
             }
           }
@@ -108,7 +109,7 @@ a {
     a.router-link-active {
       background-color: #818ca8;
 
-      > .menu-icon {
+      >.menu-icon {
         i {
           color: lightgray;
         }
@@ -337,6 +338,7 @@ a {
       padding-left: 1rem;
       padding-right: 1rem;
     }
+
     .layout-topbar {
       padding-left: 1rem;
       padding-right: 1rem;
@@ -373,5 +375,33 @@ a {
 
   .card {
     @include card;
+  }
+}
+
+.p-paginator {
+  border-bottom-left-radius: 1rem !important;
+  border-bottom-right-radius: 1rem !important;
+  border: 0;
+
+  >p-dropdown {
+    order: -1;
+    margin-right: auto;
+  }
+}
+
+.p-datatable .p-datatable-header {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  background-color: white;
+  border: 0;
+}
+
+
+.p-datatable-wrapper{
+  overflow-x: scroll;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
