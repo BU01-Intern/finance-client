@@ -9,6 +9,7 @@ export class TableComponent implements OnInit {
   @Input() items!: any[];
   @Input() keys!: string[];
   @Input() colnames!: string[];
+  @Input() status!: boolean;
   dict: any = {};
 
   constructor() {}
