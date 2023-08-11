@@ -6,7 +6,11 @@ import { MainComponent } from './main.component';
 
 @NgModule({
   declarations: [MainComponent],
-  imports: [CommonModule, ShareModule, RouterModule],
-  exports: [MainComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ShareModule,
+  ],
+  exports: [MainComponent]
 })
 export class MainModule {}

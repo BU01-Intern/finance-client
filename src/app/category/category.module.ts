@@ -17,11 +17,17 @@ import { CustomerDetailComponent } from './customer-detail/customer-detail.compo
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { FormsModule } from '@angular/forms';
 import { CategoryRoutingModule } from './category-routing.module';
+import { RoleComponent } from './role/role.component';
+import { RoleDetailComponent } from './role/role-detail/role-detail.component';
+import { RouterModule } from '@angular/router';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
     CustomerDetailComponent,
-    CustomerComponent
+    CustomerComponent,
+    RoleDetailComponent,
+    RoleComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +49,18 @@ import { CategoryRoutingModule } from './category-routing.module';
   ],
   exports: [
     CustomerDetailComponent,
-    CustomerComponent
+    CustomerComponent,
+    RoleComponent,
+    RoleDetailComponent,
+    RouterModule,
+    InputTextModule,
+    ButtonModule,
+    TableModule,
+    TagModule,
+    DividerModule,
+    AvatarModule,
+    DropdownModule,
   ],
+
 })
 export class CategoryModule { }

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 import { CustomerComponent } from './customer/customer.component';
+import { RoleComponent } from './role/role.component';
+import { RoleDetailComponent } from './role/role-detail/role-detail.component';
 
 const routes: Routes = [
   {
@@ -31,6 +33,29 @@ const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'role',
+        data: {
+          breadcrumb: 'Vai trò',
+        },
+        children: [
+          {
+            path: '',
+            component: RoleComponent,
+            data: {
+              breadcrumb: null,
+            },
+          },
+          {
+            path: 'detail/:id',
+            component: RoleDetailComponent,
+            data: {
+              breadcrumb: 'Chi tiết',
+            },
+          },
+        ],
+      },
+    
     ],
   },
 ];
