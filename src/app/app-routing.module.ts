@@ -29,7 +29,7 @@ const routes: Routes = [
             path: 'detail/:id',
             component: CustomerDetailComponent,
             data: {
-              breadcrumb: 'Thông tin',
+              breadcrumb: 'Chi tiết',
             },
           },
         ],

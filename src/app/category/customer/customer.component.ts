@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./customer.component.scss']
 })
 export class CustomerComponent implements OnInit {
+  searchText: string = '';
   customers: Customer[] = [];
   numRows: Number = 0;
   constructor(private router: Router) { }
@@ -77,15 +78,26 @@ export class CustomerComponent implements OnInit {
     XLSX.writeFile(wb, fileName);
   }
 
-  search(){
-    alert("ahihih")
-  }
-
-  // routerLink() {
-  //   this.router.navigateByUrl('/customer/detail')
-  // }
-
   routerLink(customer: Customer) {
     this.router.navigate(['/customer/detail', customer.id]);
   }
+
+  search() {
+    this.customers = this.filterCustomers(this.searchText);
+    this.numRows = this.customers.length;
+  }
+  
+  filterCustomers(searchText: string): Customer[] {
+    searchText = searchText.toLowerCase();
+    return this.customers.filter(
+      customer =>
+        customer && 
+        (customer.code && customer.code.toLowerCase().includes(searchText)) ||
+        (customer.name && customer.name.toLowerCase().includes(searchText)) ||
+        (customer.group && customer.group.toLowerCase().includes(searchText)) ||
+        (customer.status && customer.status.toLowerCase().includes(searchText))
+    );
+  }
+  
+  
 }
