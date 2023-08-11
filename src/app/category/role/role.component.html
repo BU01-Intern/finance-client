@@ -1,0 +1,44 @@
+<p-table class="p-element" [value]="roles" responsiveLayout="stack" [scrollable]="true" scrollHeight="flex" [rows]="10"
+    [rowsPerPageOptions]="[10, 25, 50]" [showCurrentPageReport]="true"
+    currentPageReportTemplate="{first} - {last} trong số {totalPages}" [paginator]="true"
+    [tableStyle]="{ 'min-width': '50rem' }" [rowHover]="true">
+    <<ng-template pTemplate="caption">
+        <div class="flex justify-content-between align-items-end">
+            <div class="search-box col-md-7">
+                <h2>Role
+                    <sup><p-tag>{{numRows}}</p-tag></sup>
+                </h2>
+                <div class="p-input-icon-left p-input-icon-right p-input-icon-right p-inputgroup">
+                    <i class="pi pi-search"></i>
+                    <input class="border-0 border-round-lg" (keydown.enter)="findRoles(filter.value)" type="text" pInputText placeholder="Tìm kiếm" #filter />
+                    <i>
+                        <i (click)="findRoles(filter.value)" class="pi-chevron-right pi"></i>
+                    </i>
+                </div>
+            </div>
+            <div>
+                <p-button (click)="exportToCSV()" label="Xuất tệp tin" icon="pi pi-download"
+                    styleClass="p-button-outlined"></p-button>
+            </div>
+        </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="max-width:10%">#</th>
+                <th class="table-header" pSortableColumn="{{ key }}" *ngFor="let key of keys">
+                    {{ dict[key] }} <p-sortIcon field="{{ key }}"></p-sortIcon>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-role let-columns="columns" let-rowIndex="rowIndex">
+            <tr (click)="navigateRoleDetail(role.id)">
+                <td style="max-width:10%">{{rowIndex + 1}}</td>
+                <td>{{role.id}}</td>
+                <td>{{role.titleRole}}</td>
+                <td>{{role.projectRole}}</td>
+                <td>
+                    <p-tag [value]="translateStatus(role.status)" [severity]="getSeverity(role.status)"></p-tag>
+                </td>
+            </tr>
+        </ng-template>
+</p-table>
