@@ -396,3 +396,12 @@ a {
 .border-round-2xl {
   background: white;
 }
+
+.p-breadcrumb {
+  background: none;
+  border: none;
+}
+
+.p-breadcrumb .p-breadcrumb-chevron::before {
+  content: '\2022';
+}

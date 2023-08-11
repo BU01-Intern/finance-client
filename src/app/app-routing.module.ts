@@ -5,12 +5,37 @@ import { CustomerDetailComponent } from './category/customer-detail/customer-det
 import { CustomerComponent } from './category/customer/customer.component';
 
 const routes: Routes = [
-  { path: '', component: MainComponent, 
-    children:[
-      { path: 'customer', component: CustomerComponent },
-      { path: 'customer/detail/:id', component: CustomerDetailComponent }
-    ] 
-  }
+  {
+    path: '',
+    component: MainComponent,
+    data: {
+      breadcrumb: null,
+    },
+    children: [
+      {
+        path: 'customer',
+        data: {
+          breadcrumb: 'Khách hàng',
+        },
+        children: [
+          {
+            path: '',
+            component: CustomerComponent,
+            data: {
+              breadcrumb: null,
+            },
+          },
+          {
+            path: 'detail/:id',
+            component: CustomerDetailComponent,
+            data: {
+              breadcrumb: 'Thông tin',
+            },
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 @NgModule({
