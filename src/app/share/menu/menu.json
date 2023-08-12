@@ -18,7 +18,7 @@
         },
         {
           "name": "Dự án",
-          "routerLink": "#"
+          "routerLink": "/category/project"
         },
         {
           "name": "Vai trò",

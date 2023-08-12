@@ -9,6 +9,8 @@ import { DetailComponent } from './staff/detail/detail.component';
 import { CostImplicationsComponent } from './cost-implications/cost-implications.component';
 import { ContractComponent } from './contract/contract.component';
 import { TechnologyComponent } from './contract/technology/technology.component';
+import { ProjectComponent } from './project/project.component';
+import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
 
 const routes: Routes = [
   {
@@ -105,6 +107,28 @@ const routes: Routes = [
           {
             path: 'detail/:id',
             component: TechnologyComponent,
+            data: {
+              breadcrumb: 'Chi tiết',
+            },
+          },
+        ],
+      },
+      {
+        path: 'project',
+        data: {
+          breadcrumb: 'Dự án',
+        },
+        children: [
+          {
+            path: '',
+            component: ProjectComponent,
+            data: {
+              breadcrumb: null,
+            },
+          },
+          {
+            path: 'detail/:id',
+            component: ProjectDetailComponent,
             data: {
               breadcrumb: 'Chi tiết',
             },
