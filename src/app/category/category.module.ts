@@ -16,7 +16,6 @@ import { RoleComponent } from './role/role.component';
 import { RoleDetailComponent } from './role/role-detail/role-detail.component';
 import { StaffComponent } from './staff/staff.component';
 import { TableModule } from 'primeng/table';
-import { ContractComponent } from './contract/contract.component';
 import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -32,6 +31,8 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { CostImplicationsComponent } from './cost-implications/cost-implications.component';
+import { ContractComponent } from './contract/contract.component';
+import { TechnologyComponent } from './contract/technology/technology.component';
 
 @NgModule({
   declarations: [

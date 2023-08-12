@@ -10,7 +10,7 @@
         },
         {
           "name": "Hợp đồng",
-          "routerLink": "#"
+          "routerLink": "/category/contract"
         },
         {
           "name": "Khoản mục chi phí",

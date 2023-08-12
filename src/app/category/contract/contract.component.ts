@@ -1,21 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
-import { Router } from '@angular/router'; 
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContractdetailService } from 'src/app/service/contractdetail.service';
 @Component({
   selector: 'app-contract',
   templateUrl: './contract.component.html',
-  styleUrls: ['./contract.component.scss']
+  styleUrls: ['./contract.component.scss'],
 })
 export class ContractComponent {
-  constructor(private router: Router, private contract: ContractdetailService){}
+  constructor(
+    private router: Router,
+    private contract: ContractdetailService,
+    private route: ActivatedRoute
+  ) {}
   ngOnInit() {
     this.product = this.contract.contracts;
   }
   [x: string]: any;
   first: number = 0;
   rows: number = 10;
-  product: any[] = []
+  product: any[] = [];
   // {code: 'HD765433', name: 'Hợp đồng ban công nghệ', start: '15/05/2023', finish: '15/09/2023', status: 0},
   //   {code: 'HD765434', name: 'Hợp đồng ban nhân sự', start: '16/05/2023', finish: '20/09/2023', status: 0},
   //   {code: 'HD765435', name: 'Hợp đồng ban quản lý', start: '17/05/2023', finish: '30/10/2023', status: 0},
@@ -64,7 +68,14 @@ export class ContractComponent {
     const sheetName = 'Danh sách hợp đồng';
 
     const data: any[][] = [
-      ['#', 'Mã hợp đồng', 'Tên hợp đồng', 'Ngày bắt đầu', 'Ngày kết thúc','Trạng thái']
+      [
+        '#',
+        'Mã hợp đồng',
+        'Tên hợp đồng',
+        'Ngày bắt đầu',
+        'Ngày kết thúc',
+        'Trạng thái',
+      ],
     ];
 
     this.product.forEach((product, index) => {
@@ -75,7 +86,7 @@ export class ContractComponent {
         product.name,
         product.start,
         product.finish,
-        this.getStatus(product.status)
+        this.getStatus(product.status),
       ]);
     });
 
@@ -84,10 +95,9 @@ export class ContractComponent {
     XLSX.utils.book_append_sheet(wb, ws, sheetName);
     XLSX.writeFile(wb, fileName);
   }
-  
 
   onRowClick(id: string) {
-    this.router.navigate(['/Tech',id]);
+    this.router.navigate(['detail', id], { relativeTo: this.route });
   }
 }
 interface Product {

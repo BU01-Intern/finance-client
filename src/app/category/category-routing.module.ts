@@ -7,6 +7,8 @@ import { RoleDetailComponent } from './role/role-detail/role-detail.component';
 import { StaffComponent } from './staff/staff.component';
 import { DetailComponent } from './staff/detail/detail.component';
 import { CostImplicationsComponent } from './cost-implications/cost-implications.component';
+import { ContractComponent } from './contract/contract.component';
+import { TechnologyComponent } from './contract/technology/technology.component';
 
 const routes: Routes = [
   {
@@ -86,6 +88,28 @@ const routes: Routes = [
         data: {
           breadcrumb: 'Khoản mục chi phí',
         },
+      },
+      {
+        path: 'contract',
+        data: {
+          breadcrumb: 'Hợp đồng',
+        },
+        children: [
+          {
+            path: '',
+            component: ContractComponent,
+            data: {
+              breadcrumb: null,
+            },
+          },
+          {
+            path: 'detail/:id',
+            component: TechnologyComponent,
+            data: {
+              breadcrumb: 'Chi tiết',
+            },
+          },
+        ],
       },
     ],
   },
