@@ -48,7 +48,7 @@ export class ContractdetailService {
       "start": "20/06/2023",
       "finish": "02/12/2023",
       // "money" : "200.000.000 VNĐ",
-      "status": 1,
+      "status": 0,
       "tech": [
         {
           "project": "VSS_FINANCE_C",
@@ -274,7 +274,7 @@ export class ContractdetailService {
       "start": "06/06/2023",
       "finish": "01/10/2023",
       // "money" : "350.000.000 VNĐ",
-      "status": 1,
+      "status": 0,
       "tech": [
         {
           'project': "VSS_FINANCE_D",
@@ -352,7 +352,7 @@ export class ContractdetailService {
       "start": "15/05/2023",
       "finish": "23/12/2023",
       // "money" : "420.000.000 VNĐ",
-      "status": 1,
+      "status": 0,
       "tech": [
         {
           "project": "VSS_FINANCE_F",
@@ -408,7 +408,7 @@ export class ContractdetailService {
       "start": "10/01/2023",
       "finish": "01/10/2023",
       // "money" : "420.000.000 VNĐ",
-      "status": 1,
+      "status": 0,
       "tech": [
         {
           "project": "VSS_FINANCE_A",
