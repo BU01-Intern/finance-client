@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { CostImplicationService } from './cost-implication.service';
-import { CostImplication } from 'src/app/share/cost-implications/cost_implication';
 import * as XLSX from 'xlsx';
+import { CostImplication } from './cost_implication';
 
 @Component({
   selector: 'app-cost-implications',

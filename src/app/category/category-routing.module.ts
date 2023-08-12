@@ -6,6 +6,7 @@ import { RoleComponent } from './role/role.component';
 import { RoleDetailComponent } from './role/role-detail/role-detail.component';
 import { StaffComponent } from './staff/staff.component';
 import { DetailComponent } from './staff/detail/detail.component';
+import { CostImplicationsComponent } from './cost-implications/cost-implications.component';
 
 const routes: Routes = [
   {
@@ -78,6 +79,13 @@ const routes: Routes = [
             },
           },
         ],
+      },
+      {
+        path: 'cost_implications',
+        component: CostImplicationsComponent,
+        data: {
+          breadcrumb: 'Khoản mục chi phí',
+        },
       },
     ],
   },
