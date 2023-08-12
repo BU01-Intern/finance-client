@@ -1,0 +1,55 @@
+<div>
+    <p-table [value]="customers" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="10"
+        [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} trong số {totalRecords}"
+        [rowsPerPageOptions]="[10, 25, 50]" [rowHover]="true">
+        <ng-template pTemplate="caption">
+            <div class="flex justify-content-between align-items-end mb-4 mx-3 w-100">
+                <div class="search-box col-md-7">
+                    <h2 class="flex align-items-end">Khách hàng<p-tag class="ml-1 mb-2">{{numRows}}</p-tag></h2>
+                    <div class="p-input-icon-left p-input-icon-right">
+                        <i class="pi pi-search"></i>
+                        <input type="text" pInputText placeholder="Tìm kiếm" [(ngModel)]="searchText"/>
+                        <i class="pi-chevron-right pi" (click)="search()"></i>
+                    </div>
+                </div>
+                <div class="col-15">
+                    <p-button icon="pi pi-download" label="Xuất tệp tin" styleClass="p-button-outlined"
+                        (click)="exportToExcel()"></p-button>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:2%">#</th>
+                <th pSortableColumn="code" style="width:10%; text-align: center">Mã khách hàng <p-sortIcon
+                        field="code"></p-sortIcon></th>
+                <th pSortableColumn="name" style="width:20%">Tên khách hàng <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="group" style="width:20%; text-align: center">Nhóm khách hàng <p-sortIcon
+                        field="group"></p-sortIcon>
+                </th>
+                <th pSortableColumn="status" style="width:10%">Trạng thái</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-customer let-i="rowIndex">
+            <tr (click)="routerLink(customer)">
+                <td>{{ i + 1 }}</td>
+                <td style="text-align: center;">{{customer.code}}</td>
+                <td>
+                    <img [alt]="customer.name"
+                        src="https://media.istockphoto.com/id/586067830/vector/flat-icon-a-capybara.jpg?s=170667a&w=0&k=20&c=V0pgPnBUONzIkyMy-X4DMfuucYZGTXnGJt-we08UTNU="
+                        width="32" style="vertical-align: middle" />
+                    <span class="ml-1 vertical-align-middle">{{ customer.name }}</span>
+                </td>
+                <td style="text-align: center;">
+                    <p-chip>
+                        <div class="p-1">{{customer.group}}</div>
+                    </p-chip>
+                </td>
+                <td>
+                    <p-tag [severity]="getTagSeverity(customer.status)" [value]="customer.status"
+                        class="text-white"></p-tag>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

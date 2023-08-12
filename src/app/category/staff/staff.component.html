@@ -1,0 +1,55 @@
+<div class="">
+    <p-table #dt [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [showCurrentPageReport]="true"
+        currentPageReportTemplate="{first} - {last} trong số {totalPages}" [paginator]="true" [value]="items"
+        class="responsive-table " [tableStyle]="{ 'min-width': '100%' }" [rowHover]="true"
+        [globalFilterFields]="['id', 'name', 'email']">
+        <!-- topbar -->
+        <ng-template pTemplate="caption" class="bg-white">
+            <div class="flex align-items-center justify-content-between">
+                <h2 class="flex align-items-center">Nhân sự <p-tag class="mb-3 ml-2">{{numRows}}</p-tag>
+                </h2>
+            </div>
+
+            <div class="flex gap-2">
+                <!-- searchbar -->
+                <span class="p-input-icon-left mr-auto">
+                    <i class="pi pi-search border-left-none"></i>
+                    <input type="text" pInputText [style.width]="'360px'" class="border-0"
+                        style="background-color:#f3f7fa;" placeholder="Tìm kiếm mã, tên nhân viên, Email"
+                        (input)="dt.filterGlobal($any($event.target).value, 'contains')" />
+                </span>
+                <!-- export -->
+                <p-button label="Xuất tệp tin" icon="pi pi-download" styleClass="p-button-outlined"
+                    (click)="exportToCSV()"></p-button>
+            </div>
+        </ng-template>
+
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="background-color:#f3f7fa;">#</th>
+                <th style="background-color:#f3f7fa;" *ngFor="let key of keys" class="table-header"
+                    pSortableColumn="{{ key }}">
+                    {{ dict[key] }} <p-sortIcon field="{{ key }}"></p-sortIcon>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+            <tr (click)="onRowClick(item.id)">
+                <td>{{rowIndex+1}}</td>
+                <td *ngFor="let key of keys">
+                    <div *ngIf="key === 'name'" class="flex gap-3 align-items-center">
+                        <img [src]="item.picture" class="avatar">
+                        <div class="staff-details">
+                            <span class="staff-name">{{ item.name }}</span>
+                            <span class="staff-id">{{ item.id }}</span>
+                        </div>
+                    </div>
+                    <p-tag *ngIf="key === 'status'" [value]="getStatus(item.status)" [severity]="getSeverity(item)">
+                    </p-tag>
+                    <span *ngIf="key !== 'status' && key !== 'name'">{{ item[key] }}</span>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

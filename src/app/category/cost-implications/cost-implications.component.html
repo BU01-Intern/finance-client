@@ -1,0 +1,228 @@
+<div class="card">
+  <p-toast></p-toast>
+  <p-table
+    #dt
+    [value]="cost_implications"
+    [paginator]="true"
+    [rows]="rows"
+    [tableStyle]="{ 'min-width': '100%' }"
+    [rowHover]="true"
+    dataKey="id"
+    currentPageReportTemplate="{first} - {last} trong số {totalRecords}"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [showCurrentPageReport]="true"
+    [lazy]="false"
+    [globalFilterFields]="['khoan_muc', 'so_tai_khoan', 'loai_chi_phi', 'loai_phan_bo', 'trang_thai']"
+  >
+    <ng-template pTemplate="caption">
+      <h3>
+        Khoản mục chi phí
+        <sup>
+          <p-badge value="{{ cost_implications.length }}"></p-badge>
+        </sup>
+      </h3>
+      <div class="flex gap-2">
+        <span class="p-input-icon-left p-input-icon-right mr-auto">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+            placeholder="Tìm kiếm"
+          />
+          <i class="pi pi-filter-fill"></i>
+        </span>
+        <button
+          pButton
+          pRipple
+          label="Thêm mới"
+          icon="pi pi-plus"
+          (click)="openNew()"
+        ></button>
+        <p-button
+          chooseLabel="Xuất tệp tin"
+          label="Xuất tệp tin"
+          icon="pi pi-download"
+          styleClass="p-button-outlined"
+          (click)="exportToExcel()"
+        ></p-button>
+        <p-fileUpload
+          mode="basic"
+          accept="image/*"
+          [maxFileSize]="1000000"
+          label="Tải lên tệp tin"
+          chooseLabel="Tải lên tệp tin"
+          icon="pi pi-download"
+          styleClass="p-button-outlined"
+        ></p-fileUpload>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" class="flex">
+      <tr>
+        <th>#</th>
+        <th pSortableColumn="khoan_muc" style="min-width: 12rem">
+          Khoản mục <p-sortIcon field="khoan_muc"></p-sortIcon>
+        </th>
+        <th pSortableColumn="so_tai_khoan" style="min-width: 12em">
+          Số tài khoản <p-sortIcon field="so_tai_khoan"></p-sortIcon>
+        </th>
+        <th pSortableColumn="loai_chi_phi" style="min-width: 12rem">
+          Loại chi phí <p-sortIcon field="loai_chi_phi"></p-sortIcon>
+        </th>
+        <th pSortableColumn="loai_phan_bo" style="min-width: 12rem">
+          Loại phân bố <p-sortIcon field="loai_phan_bo"></p-sortIcon>
+        </th>
+        <th pSortableColumn="trang_thai" style="min-width: 10rem">
+          Trạng thái<p-sortIcon field="trang_thai"></p-sortIcon>
+        </th>
+        <th>Thao tác</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cost_implication let-i="rowIndex">
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td>{{ cost_implication.khoan_muc }}</td>
+        <td>{{ cost_implication.so_tai_khoan }}</td>
+        <td>{{ cost_implication.loai_chi_phi }}</td>
+        <td>{{ cost_implication.loai_phan_bo}}</td>
+        <td>
+          <p-tag
+            [value]="getStatus(cost_implication.trang_thai)"
+            [severity]="getSeverity(cost_implication.trang_thai)"
+          ></p-tag>
+        </td>
+
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-text p-button-raised mr-2"
+            (click)="editCostImplications(cost_implication)"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-text p-button-raised p-button-danger"
+            (click)="deletetCostImplications(cost_implication)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<p-dialog
+  [(visible)]="costImplicationDialog"
+  [style]="{ width: '450px' }"
+  header="Chi tiết khoản mục chi phí"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <div class="field">
+      <label for="khoan_muc">Khoản mục</label>
+      <input
+        type="text"
+        pInputText
+        id="khoan_muc"
+        [(ngModel)]="cost_implication.khoan_muc"
+        required
+        autofocus
+      />
+      <small class="p-error" *ngIf="submitted && !cost_implication.khoan_muc"
+        >Khoản mục là bắt buộc.</small
+      >
+    </div>
+
+    <div class="field">
+      <label for="so_tai_khoan">Số tài khoản</label>
+      <input
+        type="text"
+        pInputText
+        id="so_tai_khoan"
+        [(ngModel)]="cost_implication.so_tai_khoan"
+        required
+        autofocus
+      />
+      <small class="p-error" *ngIf="submitted && !cost_implication.so_tai_khoan"
+        >Số tài khoản là bắt buộc.</small
+      >
+    </div>
+    <div class="field">
+      <label for="loai_chi_phi">Loại chi phí</label>
+      <input
+        type="text"
+        pInputText
+        id="loai_chi_phi"
+        [(ngModel)]="cost_implication.loai_chi_phi"
+        required
+        autofocus
+      />
+      <small class="p-error" *ngIf="submitted && !cost_implication.loai_chi_phi"
+        >Loại chi phí là bắt buộc.</small
+      >
+    </div>
+    <div class="field">
+      <label for="loai_phan_bo">Loại phân bổ</label>
+      <input
+        type="text"
+        pInputText
+        id="loai_phan_bo"
+        [(ngModel)]="cost_implication.loai_phan_bo"
+        required
+        autofocus
+      />
+      <small class="p-error" *ngIf="submitted && !cost_implication.loai_phan_bo"
+        >Loại phân bổ là bắt buộc.</small
+      >
+
+      <div class="field">
+        <label for="trang_thai">Trạng thái</label>
+        <p-dropdown
+          [(ngModel)]="cost_implication.trang_thai"
+          inputId="trang_thai"
+          [options]="statuses"
+        >
+          <ng-template pTemplate="selectedItem">
+            <p-tag
+              [value]="
+                getStatus(cost_implication.trang_thai ? cost_implication.trang_thai : 0)
+              "
+              [severity]="
+                getSeverity(
+                  cost_implication.trang_thai ? cost_implication.trang_thai : 0
+                )
+              "
+            ></p-tag>
+          </ng-template>
+          <ng-template let-option pTemplate="item">
+            <p-tag
+              [value]="option.label"
+              [severity]="getSeverity(option.value)"
+            ></p-tag>
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Hủy bỏ"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="hideDialog()"
+    ></button>
+    <button
+      pButton
+      pRipple
+      label="Lưu"
+      icon="pi pi-check"
+      class="p-button-text"
+      (click)="saveCostImplications()"
+    ></button>
+  </ng-template>
+</p-dialog>
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

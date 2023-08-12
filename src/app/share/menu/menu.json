@@ -1,0 +1,79 @@
+{
+  "data": [
+    {
+      "name": "Danh mục",
+      "icon": "pi pi-home",
+      "children": [
+        {
+          "name": "Khách hàng",
+          "routerLink": "/category/customer"
+        },
+        {
+          "name": "Hợp đồng",
+          "routerLink": "#"
+        },
+        {
+          "name": "Khoản mục chi phí",
+          "routerLink": "/category/cost_implications"
+        },
+        {
+          "name": "Dự án",
+          "routerLink": "#"
+        },
+        {
+          "name": "Vai trò",
+          "routerLink": "/category/role"
+        },
+        {
+          "name": "Nhân sự",
+          "routerLink": "/category/staff"
+        }
+      ]
+    },
+    {
+      "name": "Menu 2",
+      "icon": "pi pi-compass",
+      "children": [
+        {
+          "name": "Submenu 1",
+          "children": [
+            {
+              "name": "Link 4",
+              "routerLink": "#"
+            },
+            {
+              "name": "Link 5",
+              "routerLink": "#"
+            },
+            {
+              "name": "Link 6",
+              "routerLink": "#"
+            }
+          ]
+        },
+        {
+          "name": "Submenu 2",
+          "children": [
+            {
+              "name": "Link 7",
+              "routerLink": "#"
+            },
+            {
+              "name": "Link 8",
+              "routerLink": "#"
+            },
+            {
+              "name": "Link 9",
+              "routerLink": "#"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Link 10",
+      "icon": "pi pi-palette",
+      "routerLink": "#"
+    }
+  ]
+}
