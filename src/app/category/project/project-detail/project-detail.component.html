@@ -1,0 +1,169 @@
+<div class="flex gap-3 ">
+    <div class=" border-1 border-round-2xl mb-3 p-3 custom-container col-8">
+        <h4 class="m-1">Thông tin chung</h4>
+        <div class=" flex">
+            <p-avatar class="mt-4" size="xlarge" label="U" styleClass="mr-2"
+                [style]="{ 'background-color': 'blue', color: '#ffffff' }"></p-avatar>
+            <div>
+                <h4>VSS-FINANCE(VSSFIN)</h4>
+                <p class="font-light">BU-01</p>
+            </div>
+        </div>
+        <p-divider></p-divider>
+        <div class="grid-nogutter">
+            <div class="flex">
+                <div class="flex col-3">
+                    <span style="color: gray; font-weight: bold;" class="w-10rem white-space-nowrap">Ngày bắt đầu
+                    </span>
+                </div>
+                <div class="flex col-3">
+                    <span>{{project?.start_date}}</span>
+                </div>
+                <div class="flex col-3">
+                    <span style="color: gray; font-weight: bold;" class="w-10rem white-space-nowrap">Ngày kết thúc
+                    </span>
+                </div>
+                <div class="flex col-3">
+                    <div>{{project?.finish_date}}</div>
+                </div>
+            </div>
+
+            <div class="flex">
+                <div class="flex col-3">
+                    <span style="color: gray; font-weight: bold;" class="w-10rem white-space-nowrap">PM </span>
+                </div>
+                <div class="flex col-3">
+                    <div>{{project?.pm?.name }}</div>
+                </div>
+                <div class="flex col-3">
+                    <span style="color: gray; font-weight: bold;" class="w-10rem white-space-nowrap">Loại dự án </span>
+                </div>
+                <div class="flex col-3">
+                    <div>{{project?.category}}</div>
+                </div>
+            </div>
+
+            <div class="flex">
+                <div class="flex col-3">
+                    <span style="color: gray; font-weight: bold;" class="w-10rem white-space-nowrap">Khách hàng </span>
+                </div>
+                <div class="flex col-3">
+                    <div>{{project?.customer}}</div>
+                </div>
+                <div class="flex col-3">
+                    <span style="color: gray; font-weight: bold;" class="w-10rem white-space-nowrap"> Trạng thái </span>
+                </div>
+                <div class="flex col-3">
+                    <div><p-tag [value]="translateProjectStatus(project?.status)" [severity]="getSeverity(project?.status)"></p-tag></div>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="flex col-3">
+                    <span style="color: gray; font-weight: bold;" class="w-10rem white-space-nowrap"> Mô tả </span>
+                </div>
+                <div class="flex col-9">
+                    <div class="nowrap">It is a long established fact that a reader will be distracted by the readable content
+                        of a page
+                        when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                        distribution of letters, as opposed to using'Content here</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex-1 border-1 border-round-2xl mb-3 p-3 col-4">
+        <h4 class="m-1">Thông tin hợp đồng</h4>
+        <div>
+            <span class="flex m-2">
+                <i class="flex col-1 pi pi-user-edit" style="font-size: 2rem; color: blue"></i>
+                <p class="flex col-11 m-0">It is a long established fact that a reader will be distracted by the readable content
+                    of a page
+                    when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                    distribution of letters, as opposed to using'Content here</p>
+            </span>
+        </div>  
+        <p-divider></p-divider>
+        <div>
+            <div class="flex">
+                <div class="flex col-9">
+                    <span style="color: gray; font-weight: bold; width: 15rem" class="w-10rem white-space-nowrap">Mã hợp đồng </span>
+                </div>
+                <div class="flex col-3">
+                    <div class="font-bold"></div>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="flex col-9">
+                    <span style="color: gray; font-weight: bold;" class="w-10rem white-space-nowrap">Ngày bắt đầu
+                    </span>
+                </div>
+                <div class="flex col-3">
+                    <div class="font-bold">12/05/2023</div>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="flex col-9">
+                    <span style="color: gray; font-weight: bold;" class="w-10rem white-space-nowrap">Ngày kết thúc
+                    </span>
+                </div>
+                <div class="flex col-3">
+                    <div  class="font-bold">12/05/2023</div>
+                </div>
+            </div>
+           <div class="flex">
+            <div class="flex col-9">
+                <div class="flex">
+                    <span style="color: gray; font-weight: bold;" class="w-10rem white-space-nowrap">Trạng thái </span>
+                </div>
+            </div>
+            <div class="flex col-3">
+                <div><p-tag value="Hoạt động" severity='success'></p-tag></div>
+            </div>
+           </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <p-table [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [paginator]="true"
+        [value]="staffs" class="responsive-table" [tableStyle]="{ 'min-width': '100%' }">
+        <ng-template pTemplate="caption" class="border-none">
+            <div class="flex align-items-center justify-content-between ">
+                <h2 class="my-2 flex align-items-center">Nhân viên thuộc dự án
+                    <p-badge class="mb-3 ml-2" value={{staffs.length}}></p-badge>
+                </h2>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" class="flex">
+            <tr>
+                <th>#</th>
+                <th pSortableColumn="name" style="width:auto">Nhân viên <i class=" pi pi-arrow-down"></i>
+                </th>
+                <th pSortableColumn="email" style="width:auto">Email <i class=" pi pi-arrow-down"></i></th>
+                <th pSortableColumn="start_date" style="width:auto">Ngày bắt đầu <i class=" pi pi-arrow-down"></i>
+                </th>
+                <th pSortableColumn="finish_date" style="width: auto;">Ngày kết thúc <i class=" pi pi-arrow-down"></i>
+                </th>
+                <th pSortableColumn="role" style="width: auto;">Vai trò <i class=" pi pi-arrow-down"></i></th>
+                <th pSortableColumn="status" style="width: auto;">Trạng thái <i class=" pi pi-arrow-down"></i></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-staffs let-i="rowIndex">
+            <tr>
+                <td>{{ i + 1 }}</td>
+                <td><span class="p-column-title">PM</span>
+                    <img [alt]="staffs.employee.name" [src]="staffs.employee.image" width="32"
+                        style="vertical-align: middle" />
+                    <span class="ml-1 vertical-align-middle">{{staffs.employee.name}}</span>
+                </td>
+                <td>{{staffs.email}}</td>
+                <td>{{staffs.start_date}}</td>
+                <td>{{staffs.finish_date}}</td>
+                <td>{{staffs.role}}
+                </td>
+                <td><p-tag [value]="translateStatus(staffs.status)" [severity]="getSeverity(staffs.status)"></p-tag></td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

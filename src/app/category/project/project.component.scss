@@ -1,0 +1,29 @@
+.container{
+    background-color: #F8F9FA;
+}
+
+.toolbar{
+    background-color: white;
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.search-box{
+    input{
+        width: 20vw;
+        height: 6vh;
+        background-color: #F8F9FA;
+    }
+}
+
+.export-button{
+    width: 7rem!important;
+}
+
+i{
+    cursor: pointer;
+    :hover{
+        filter: brightness(150%);
+    }
+}
