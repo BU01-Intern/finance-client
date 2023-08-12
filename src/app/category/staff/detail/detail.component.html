@@ -1,0 +1,72 @@
+<!-- staff table border-0 border-round-2xl mb-3 p-3 -->
+<div class="card  border-round-2xl overflow-hidden" style="margin-bottom: 20px;">
+    <div class="card-theme">
+        <div>
+            <h2 class="flex align-items-center">Thông tin chung</h2>
+        </div>
+        <div>
+            <div>
+                <div class="flex gap-3 align-items-center">
+                    <img [src]="staff.picture" class="avatar">
+                    <div class="staff-details">
+                        <span class="staff-name">{{ staff.name }}</span>
+                        <span class="staff-org">{{ staff.org }}</span>
+                    </div>
+                </div>
+                <p-divider></p-divider>
+                <div class="flex justify-content-between flex-wrap">
+                    <div class="flex  min-w-0">
+                        <div style="color: gray; font-weight: bold;" class="w-10rem white-space-nowrap">Mã nhân viên</div>
+                        <div>{{ staff.id}}</div>
+                    </div>
+                    <div class="flex min-w-0">
+                        <div style="color: gray; font-weight: bold;" class="w-10rem white-space-nowrap">Email</div>
+                        <div>{{staff.email}}</div>
+                    </div>
+                    <div class="flex min-w-0 mr-8">
+                        <div style="color: gray; font-weight: bold;" class="w-10rem white-space-nowrap mr-5">Trạng thái</div>
+                        <p-tag class="mr-8" [value]="translateStatus(staff.status)" [severity]="getSeverity(staff)"></p-tag>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- project table -->
+<div class="card border-round-2xl overflow-hidden">
+    <p-table [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [showCurrentPageReport]="true"
+        currentPageReportTemplate="{first} - {last} trong số {totalPages}" [paginator]="true" [value]="items"
+        class="responsive-table" [tableStyle]="{ 'min-width': '100%' }" [rowHover]="true">
+        <!-- top bar -->
+        <ng-template pTemplate="caption" Class="bg-white">
+            <div class="flex align-items-center justify-content-between">
+                <h2 class="flex align-items-center">Dự án tham gia <p-tag class="mb-2 ml-2">{{numRows}}</p-tag>
+                </h2>
+            </div>
+        </ng-template>
+        <!-- table -->
+        <ng-template pTemplate="header">
+            <tr>
+                <th>#</th>
+                <th *ngFor="let key of keys" class="table-header" pSortableColumn="{{ key }}">
+                    {{ dict[key] }} <p-sortIcon field="{{ key }}"></p-sortIcon>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+            <tr>
+                <td>{{rowIndex+1}}</td>
+                <td *ngFor="let key of keys">
+                    <div *ngIf="key === 'project'" class="flex gap-3 align-items-center">
+                        <img [src]="item.picture" class="icons">
+                        <span class="project-details">{{ item.project }}</span>
+                    </div>
+                    <p-tag *ngIf="key === 'status'" [value]="translateStatus(item.status)"
+                        [severity]="getSeverity(item)">
+                    </p-tag>
+                    <span *ngIf="key !== 'status' && key !== 'project'">{{ item[key] }}</span>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
