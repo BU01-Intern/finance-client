@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableComponent } from './table/table.component';
+//import primeng Module
 import { TableModule } from 'primeng/table';
 import { MenuComponent } from './menu/menu.component';
 import { MenuitemComponent } from './menuitem/menuitem.component';

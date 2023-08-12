@@ -49,6 +49,8 @@ import { ProjectDetailComponent } from './project/project-detail/project-detail.
     TechnologyComponent,
     ProjectComponent,
     ProjectDetailComponent,
+    ProjectComponent,
+    ProjectDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -89,7 +91,7 @@ import { ProjectDetailComponent } from './project/project-detail/project-detail.
     ContractComponent,
     TechnologyComponent,
     ProjectComponent,
-    ProjectDetailComponent
+    ProjectDetailComponent,
   ],
 })
 export class CategoryModule {}
