@@ -14,17 +14,16 @@ import { TagModule } from 'primeng/tag';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ToolbarModule } from 'primeng/toolbar';
-import { ToastModule} from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextModule } from 'primeng/inputtext';
-import { MessageService } from 'primeng/api';
-import { BadgeModule} from 'primeng/badge';
+import { BadgeModule } from 'primeng/badge';
 import { DropdownModule } from 'primeng/dropdown';
 import { PaginatorModule } from 'primeng/paginator';
-import { DialogModule} from 'primeng/dialog';
+import { DialogModule } from 'primeng/dialog';
 import { CostImplicationService } from './cost-implications/cost-implication.service';
-import { ConfirmDialogModule} from 'primeng/confirmdialog';
-import {HttpClientModule} from '@angular/common/http';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -53,15 +52,15 @@ import {HttpClientModule} from '@angular/common/http';
     PaginatorModule,
     DialogModule,
     ConfirmDialogModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   exports: [
     TableComponent,
     MenuComponent,
     TopbarComponent,
     BreadcrumbComponent,
-    CostImplicationsComponent
+    CostImplicationsComponent,
   ],
-  providers:[CostImplicationService]
+  providers: [CostImplicationService],
 })
 export class ShareModule {}
