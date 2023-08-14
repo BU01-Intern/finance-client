@@ -1,0 +1,6 @@
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px; /* Điều chỉnh giới hạn độ dài tại đây */
+}

@@ -8,7 +8,7 @@
                     <h2 class="flex align-items-end">Khách hàng<p-tag class="ml-1 mb-2">{{numRows}}</p-tag></h2>
                     <div class="p-input-icon-left p-input-icon-right">
                         <i class="pi pi-search"></i>
-                        <input type="text" pInputText placeholder="Tìm kiếm" [(ngModel)]="searchText"/>
+                        <input type="text" pInputText placeholder="Tìm kiếm" [(ngModel)]="searchText" />
                         <i class="pi-chevron-right pi" (click)="search()"></i>
                     </div>
                 </div>
@@ -33,12 +33,12 @@
         <ng-template pTemplate="body" let-customer let-i="rowIndex">
             <tr (click)="routerLink(customer)">
                 <td>{{ i + 1 }}</td>
-                <td style="text-align: center;">{{customer.code}}</td>
-                <td>
+                <td style="text-align: center;" class="code-ellipsis">{{customer.code}}</td>
+                <td class="ellipsis">
                     <img [alt]="customer.name"
                         src="https://media.istockphoto.com/id/586067830/vector/flat-icon-a-capybara.jpg?s=170667a&w=0&k=20&c=V0pgPnBUONzIkyMy-X4DMfuucYZGTXnGJt-we08UTNU="
                         width="32" style="vertical-align: middle" />
-                    <span class="ml-1 vertical-align-middle">{{ customer.name }}</span>
+                    <span class="ml-1 vertical-align-middle" title="{{customer.name}}">{{ customer.name }}</span>
                 </td>
                 <td style="text-align: center;">
                     <p-chip>
