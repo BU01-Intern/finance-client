@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 
 import { MainModule } from './main/main.module';
 import { ShareModule } from './share/share.module';
-import { CategoryModule } from './category/category.module';
 
 @NgModule({
   declarations: [
