@@ -29,14 +29,15 @@ export class TechnologyComponent {
   product: Tech[] = [];
   id: string = '';
   getSeverity(status: any): string {
-    if (status === 'Hoạt động') {
+    if (status === 'Hoạt động' || status === 0) {
       return 'success';
-    } else if (status === 'Không hoạt động') {
-      return 'warning';
-    } else {
+    } else if (status === 'Không hoạt động' || status === 1) {
       return 'danger';
+    } else {
+      return 'warning';
     }
   }
+
   getStatus(status: number): string {
     switch (status) {
       case 0:

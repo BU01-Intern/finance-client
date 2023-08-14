@@ -1,8 +1,15 @@
 <div class="card">
-    <p-table class="p-element" [value]="projects" responsiveLayout="stack" [scrollable]="true" scrollHeight="flex" [rows]="10"
-    [rowsPerPageOptions]="[10, 25, 50]" [showCurrentPageReport]="true"
-    currentPageReportTemplate="{first} - {last} trong số {totalPages}" [paginator]="true"
-    [tableStyle]="{ 'min-width': '50rem' }" [rowHover]="true">
+
+    <p-table class="p-element" [rows]="10"
+    #dt1
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    currentPageReportTemplate="{first} - {last} of {totalRecords}"
+    [paginator]="true"
+    [value]="projects"
+    [tableStyle]="{ 'min-width': '100%' }"
+    [lazy]="false"
+    [globalFilterFields]="['project_name', 'company','start_date', 'finish_date','category', 'customer','pm.name']">
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
                 <h2 class="m-2 flex align-items-center">Dự án
@@ -12,8 +19,7 @@
             <div class="flex">
                 <span class="p-input-icon-left mr-auto p-input-icon-right mr-auto">
                     <i class="pi pi-search"></i>
-                    <input class="border-0 border-round-lg" (keydown.enter)="findProjects(filter.value)" type="text" pInputText placeholder="Tìm kiếm" #filter />
-                    <i (click)="findProjects(filter.value)" class="pi-chevron-right pi"></i>
+                    <input type="text" pInputText (input) = "dt1.filterGlobal($any($event.target).value,'contains')" placeholder="Tìm kiếm"/>    
                 </span>
                 <p-button (onClick)="exportToExcel()" label="Xuất tệp tin" icon="pi pi-download"
                     styleClass="p-button-outlined"></p-button>
@@ -35,14 +41,13 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-project let-i = "rowIndex">
-            <tr (click)="navigateProjectDetail(project.project_name)">
+            <tr (click)="navigateProjectDetail(project.id)">
                 <td>{{ i +1 }}</td>
                 <td>
                     <p-avatar label="VS" styleClass="mr-2" shape="circle"></p-avatar>
                     {{project.project_name}}
                 </td>
-                <td>
-                    {{project.company}}</td>
+                <td>{{project.company}}</td>
                 <td>{{ project.start_date }}</td>
                 <td>{{ project.finish_date }}</td>
                 <td>
@@ -51,7 +56,7 @@
                         style="vertical-align: middle" />
                     <span class="ml-1 vertical-align-middle">{{ project.pm.name }}</span>
                 </td>
-                <td>{{ project.project_category}}</td>
+                <td>{{project.category}}</td>
                 <td>{{ project.customer}}</td>
                 <td><p-tag [value]="translateStatus(project.status)" [severity]="getSeverity(project.status)"></p-tag></td>
             </tr>
