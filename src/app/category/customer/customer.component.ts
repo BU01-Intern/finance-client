@@ -10,14 +10,15 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./customer.component.scss']
 })
 export class CustomerComponent implements OnInit {
+  originalCustomers: Customer[] = [];
   searchText: string = '';
   customers: Customer[] = [];
   numRows: Number = 0;
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.customers = [
-      { id: 1, code: 'VTS', name: 'Tổng công ty giải pháp doanh nghiệp Viettel', group: 'Trong viettel', status: 'Hoạt động' },
+    this.originalCustomers  = [
+      { id: 1, code: 'VTsfvdgxhdsafghsadfdghdsafghgS', name: 'Tổng côcszvdfbgdsafdghdsafdghadsfdggng ty giải pháp doanh nghiệp Viettel', group: 'Trong viettel', status: 'Hoạt động' },
       { id: 2, code: 'ABC', name: 'Công ty ABC', group: 'Ngoài Viettel', status: 'Không hoạt động' },
       { id: 3, code: 'XYZ', name: 'Công ty XYZ', group: 'Trong viettel', status: 'Hoạt động' },
       { id: 4, code: '123', name: 'Công ty 123', group: 'Ngoài Viettel', status: 'Không hoạt động' },
@@ -38,6 +39,7 @@ export class CustomerComponent implements OnInit {
       { id: 19, code: '123', name: 'Công ty 123', group: 'Ngoài Viettel', status: 'Không hoạt động' },
       { id: 20, code: 'DEF', name: 'Công ty DEF', group: 'Trong viettel', status: 'Không hoạt động' },
     ];
+    this.customers = this.originalCustomers;
     this.numRows = this.customers.length;
   }
 
@@ -83,8 +85,13 @@ export class CustomerComponent implements OnInit {
   }
 
   search() {
-    this.customers = this.filterCustomers(this.searchText);
-    this.numRows = this.customers.length;
+    if (this.searchText) {
+      this.customers = this.filterCustomers(this.searchText);
+      this.numRows = this.customers.length;
+    } else {
+      this.customers = this.originalCustomers;
+      this.numRows = this.customers.length;
+    }
   }
 
   filterCustomers(searchText: string): Customer[] {

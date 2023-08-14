@@ -1,0 +1,104 @@
+
+<div class="border-1 border-round-2xl mb-3 p-3 custom-container">
+    <h3 class="m-1">Thông tin chung</h3>
+    <p-divider></p-divider>
+    <div>
+        <div class="flex">
+            <div class="flex col-4">
+                <span class="font-light">Mã hợp đồng </span>
+                <div class="ml-5">{{id}}</div>
+            </div>
+            <div class="flex col-4">
+                <span class="font-light">Tên hợp đồng </span>
+                <div class="ml-5">{{contract.name}}</div>
+            </div>
+            <div class="flex col-4">
+                <span class="font-light">Giá trị hợp đồng </span>
+                <div class="ml-5">
+                    <td><p-tag severity='danger'>{{customer.money}}</p-tag></td>
+                </div>
+            </div>
+        </div>
+        <div class="flex">
+            <div class="flex col-4">
+                <span class="font-light">Ngày bắt đầu </span>
+                <div class="ml-5">{{contract.start}}</div>
+            </div>
+            <div class="flex col-4">
+                <span class="font-light">Ngày kết thúc </span>
+                <div class="ml-5"> {{contract.finish}}</div>
+            </div>
+            <div class="flex col-4">
+                <p-table>
+                    [value]="tech"
+                </p-table>
+                <span class="font-light">Trạng thái </span>
+                <div class="ml-8">
+                    <td><p-tag [value]="getStatus(contract.status)" [severity]="getSeverity(contract.status)"></p-tag></td>
+                </div>
+            </div>
+        </div>
+        <div class="flex col-12">
+            <span class="font-light">Ghi chú </span>
+            <div class="ml-5"> </div>
+        </div>
+    </div>
+</div>
+
+<div class="border-1 border-round-2xl mb-3 p-3">
+    <h3 class="m-1">Thông tin khách hàng</h3>
+    <p-divider></p-divider>
+    <div >
+        <div class="flex">
+            <div class="flex col-4">
+                <span class="font-light">Mã khách hàng </span>
+                <div class="ml-5">{{customer.code}}</div>
+            </div>
+            <div class="flex col-4">
+                <span class="font-light">Tên khách hàng </span>
+                <div class="ml-5">{{customer.name}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="border-1 border-round-2xl mb-3 p-3">
+        <div class="flex align-items-center justify-content-between">
+            <h3 class="m-1">Danh sách dự án gán với hợp đồng
+            </h3>
+            <div class="p-input-icon-left mr-auto">
+                <p-badge value={{product.length}}></p-badge>
+            </div>
+        </div>
+        <p-divider></p-divider>
+        <div class="card">
+            <p-table
+              [rows]="2"
+              [showCurrentPageReport]="true"
+              [rowsPerPageOptions]="[2, 10, 50]"
+              currentPageReportTemplate="{first} - {last} of {totalRecords}"
+              [paginator]="true"
+              [value]="product"
+              [tableStyle]="{ 'min-width': '100%' }"
+              >
+                <ng-template pTemplate="header" class="flex">
+                    <tr>
+                        <th>#</th>
+                        <th pSortableColumn = 'project' style="width:20%">Dự án <p-sortIcon field="pi pi-arrow-down"></p-sortIcon></th>
+                        <th pSortableColumn = 'start' style="width:20%">Ngày bắt đầu <p-sortIcon field="pi pi-arrow-down"></p-sortIcon></th>
+                        <th pSortableColumn = 'finish' style="width:20%">Ngày kết thúc <p-sortIcon field="pi pi-arrow-down"></p-sortIcon></th>
+                        <th>Trạng thái </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product let-i="rowIndex">
+                    <tr [pSelectableRow]="product" >
+                        <td>{{ i + 1 }}</td>
+                        <td> <p-avatar label="A" styleClass="mr-2" size="large" shape="circle"></p-avatar>  <strong>{{ product.project }}</strong></td>
+                        <td>{{ product.start }}</td>
+                        <td>{{ product.finish }}</td>
+                        <td><p-tag [value]="product.status" [severity]="getSeverity(product.status)"></p-tag></td>
+                    </tr> 
+                </ng-template>
+            </p-table> 
+        </div>
+    </div>
+

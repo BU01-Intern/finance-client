@@ -21,6 +21,20 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { DetailComponent } from './staff/detail/detail.component';
 import { DividerModule } from 'primeng/divider';
+import { HttpClientModule } from '@angular/common/http';
+import { BadgeModule } from 'primeng/badge';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
+import { PaginatorModule } from 'primeng/paginator';
+import { ToastModule } from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
+import { CostImplicationsComponent } from './cost-implications/cost-implications.component';
+import { ContractComponent } from './contract/contract.component';
+import { TechnologyComponent } from './contract/technology/technology.component';
+import { ProjectComponent } from './project/project.component';
+import { ProjectDetailComponent } from './project/project-detail/project-detail.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +44,11 @@ import { DividerModule } from 'primeng/divider';
     RoleComponent,
     StaffComponent,
     DetailComponent,
+    CostImplicationsComponent,
+    ContractComponent,
+    TechnologyComponent,
+    ProjectComponent,
+    ProjectDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +67,16 @@ import { DividerModule } from 'primeng/divider';
     RadioButtonModule,
     ScrollPanelModule,
     FormsModule,
+    ToolbarModule,
+    ToastModule,
+    FileUploadModule,
+    InputTextModule,
+    BadgeModule,
+    DropdownModule,
+    PaginatorModule,
+    DialogModule,
+    ConfirmDialogModule,
+    HttpClientModule,
   ],
   exports: [
     CustomerDetailComponent,
@@ -56,6 +85,11 @@ import { DividerModule } from 'primeng/divider';
     RoleDetailComponent,
     StaffComponent,
     DetailComponent,
+    CostImplicationsComponent,
+    ContractComponent,
+    TechnologyComponent,
+    ProjectComponent,
+    ProjectDetailComponent
   ],
 })
 export class CategoryModule {}

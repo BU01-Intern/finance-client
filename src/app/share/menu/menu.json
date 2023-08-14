@@ -10,15 +10,15 @@
         },
         {
           "name": "Hợp đồng",
-          "routerLink": "#"
+          "routerLink": "/category/contract"
         },
         {
           "name": "Khoản mục chi phí",
-          "routerLink": "#"
+          "routerLink": "/category/cost_implications"
         },
         {
           "name": "Dự án",
-          "routerLink": "#"
+          "routerLink": "/category/project"
         },
         {
           "name": "Vai trò",

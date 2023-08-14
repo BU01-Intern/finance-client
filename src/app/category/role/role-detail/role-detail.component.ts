@@ -12,7 +12,6 @@ export class RoleDetailComponent implements OnInit {
     this.roleId = String(this.activateRoute.snapshot.paramMap.get('id'))
   }
   employees: Member[] = []
-  numEmployees = 0
   roleId: string = ""
   role: Role|undefined = {
     id: '',
@@ -23,7 +22,6 @@ export class RoleDetailComponent implements OnInit {
   }
   ngOnInit(): void {
     this.employees = this.roleService.getMemberByRoleId(this.roleId);
-    this.numEmployees = this.employees.length;
     this.role = this.roleService.getRoleById(this.roleId);
   }
   getSeverity(status: boolean|undefined) {

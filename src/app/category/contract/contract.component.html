@@ -1,0 +1,54 @@
+<div class="card">
+    <p-table
+    #dt
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      currentPageReportTemplate="{first} - {last} of {totalRecords}"
+      [paginator]="true"
+      [value]="product"
+      [tableStyle]="{ 'min-width': '100%' }"
+      [lazy]="false"
+      [globalFilterFields]="['code', 'name','start', 'finish','status']"
+      >
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            <h2 class="m-2">Hợp đồng
+            </h2>
+            <div class="p-input-icon-left mr-auto">
+                <p-badge value={{product.length}}></p-badge>
+            </div>
+        </div>
+        <div class="flex">
+            <span class="p-input-icon-left mr-auto p-input-icon-right mr-auto">
+                <i class="pi pi-search"></i>
+                <i class="pi pi-filter-fill"></i>
+                <input type="text" pInputText (input) = "dt.filterGlobal($any($event.target).value,'contains')" placeholder="Tìm kiếm"/>
+            </span>
+            <p-button (click)="exportToExcel()" label="Xuất tệp tin" icon="pi pi-download" styleClass="p-button-outlined"></p-button>
+        </div>
+    </ng-template>
+        <ng-template pTemplate="header" class="flex">
+            <tr>
+                <th>#</th>
+                <th pSortableColumn = 'code' style="width:20%">Mã hợp đồng <p-sortIcon field="pi pi-arrow-down"></p-sortIcon></th>
+                <th pSortableColumn = 'name' style="width:20%">Tên hợp đồng <p-sortIcon field="pi pi-arrow-down"></p-sortIcon></th>
+                <th pSortableColumn = 'start' style="width:20%">Ngày bắt đầu <p-sortIcon field="pi pi-arrow-down"></p-sortIcon></th>
+                <th pSortableColumn = 'finish' style="width:20%">Ngày kết thúc <p-sortIcon field="pi pi-arrow-down"></p-sortIcon></th>
+                <th>Trạng thái </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-i="rowIndex">
+            <tr [pSelectableRow]="product" (click)="onRowClick(product.code)">
+                <td>{{ i + 1 }}</td>
+                <td>{{ product.code }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.start }}</td>
+                <td>{{ product.finish }}</td>
+                <td>
+                <p-tag [value]="getStatus(product.status)" [severity]="getSeverity(product.status)"></p-tag>
+                </td>
+            </tr> 
+        </ng-template>
+    </p-table> 
+</div>

@@ -1,0 +1,12 @@
+.code-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 0; /* This will help trigger the ellipsis */
+}
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 0; /* This will help trigger the ellipsis */
+}
