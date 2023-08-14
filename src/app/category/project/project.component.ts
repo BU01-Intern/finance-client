@@ -23,20 +23,20 @@ export class ProjectComponent implements OnInit {
     this.keys.forEach((key, i) => (this.dict[key] = this.colnames[i]));
   }
 
-  findProjects(searchText: string) {
-    this.projects = this.projectService.getProjectsList()
-    this.projects = this.projects.filter(project =>
-      project &&
-      (project.project_name && project.project_name.toLowerCase().includes(searchText)) ||
-      (project.company && project.company.toLowerCase().includes(searchText)) ||
-      (project.pm.name && project.pm.name.toLowerCase().includes(searchText)) ||
-      (project.category && project.category.includes(searchText))||
-      (project.customer && project.customer.toLowerCase().includes(searchText))||
-      (project.start_date && project.start_date.includes(searchText))||
-      project.finish_date && project.finish_date.includes(searchText)
-    );
-    this.numRows = this.projects.length;
-  }
+  // findProjects(searchText: string) {
+  //   this.projects = this.projectService.getProjectsList()
+  //   this.projects = this.projects.filter(project =>
+  //     project &&
+  //     (project.project_name && project.project_name.toLowerCase().includes(searchText)) ||
+  //     (project.company && project.company.toLowerCase().includes(searchText)) ||
+  //     (project.pm.name && project.pm.name.toLowerCase().includes(searchText)) ||
+  //     (project.category && project.category.includes(searchText))||
+  //     (project.customer && project.customer.toLowerCase().includes(searchText))||
+  //     (project.start_date && project.start_date.includes(searchText))||
+  //     project.finish_date && project.finish_date.includes(searchText)
+  //   );
+  //   this.numRows = this.projects.length;
+  // }
 
   getSeverity(status: boolean) {
     if (status) {
