@@ -15,7 +15,6 @@ export class RoleComponent implements OnInit {
   }
 
   roles = this.roleService.getRolesList()
-  numRows = this.roles.length;
   keys: string[] = ['id', 'titleRole', 'projectRole', 'status'];
   colnames: string[] = ['Mã roles', 'Roles chức danh', 'Roles dự án', 'Trạng thái'];
   dict: any = {};
@@ -24,21 +23,6 @@ export class RoleComponent implements OnInit {
     this.keys.forEach((key, i) => (this.dict[key] = this.colnames[i]));
   }
 
-  findRoles(searchText: string) {
-    this.roles = this.roleService.getRolesList()
-    this.roles = this.roles.filter(role =>
-      role &&
-      (role.id && role.id.toLowerCase().includes(searchText)) ||
-      (role.titleRole && role.titleRole.toLowerCase().includes(searchText)) ||
-      (role.projectRole && role.projectRole.toLowerCase().includes(searchText))
-    );
-    this.numRows = this.roles.length;
-  }
-
-  reloadTable(){
-    this.roles = this.roleService.getRolesList()
-    this.numRows = this.roles.length;
-  }
   getSeverity(status: boolean) {
     if (status) {
       return 'success'

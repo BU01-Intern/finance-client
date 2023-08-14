@@ -4,23 +4,23 @@
         <p-divider></p-divider>
         <div class="flex flex-wrap justify-content-between">
             <div class="grid col-2">
-                <span class="md:col-6">Mã role</span>
+                <span class="md:col-6 font-light">Mã role</span>
                 <span class="md:col-6">{{role?.id}}</span>
             </div>
             <div class="grid col-3">
-                <span class="md:col-6">Role chức danh</span>
+                <span class="md:col-6 font-light">Role chức danh</span>
                 <div class="md:col-6">
                     <span>{{role?.titleRole}}</span>
                 </div>
             </div>
             <div class="grid col-4">
-                <span class="md:col-4">Roles dự án</span>
+                <span class="md:col-4 font-light">Roles dự án</span>
                 <div class="md:col-8">
                     <span>{{role?.projectRole}}</span>
                 </div>
             </div>
             <div class="grid col-3">
-                <span class="md:col-6">Trạng thái</span>
+                <span class="md:col-6 font-light">Trạng thái</span>
                 <span class="md:col-6 pt-1">
                     <p-tag class="pb-1" [value]="translateRoleStatus(role?.status)" [severity]="getSeverity(role?.status)"></p-tag>
                 </span>
@@ -31,10 +31,10 @@
         <p-table [value]="employees" responsiveLayout="stack" [scrollable]="true" 
          [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [showCurrentPageReport]="true"
         currentPageReportTemplate="{first} - {last} trong số {totalPages}" [paginator]="true"
-            [tableStyle]="{ 'min-width': '100%' }" [rowHover]="true">
+            [tableStyle]="{ 'min-width': '100%' }" [rowHover]="true" #dt>
             <ng-template pTemplate="caption">
                 <h4 class="m-0">Danh sách nhân viên thuộc Roles
-                    <sup><p-tag >{{numEmployees}}</p-tag></sup>
+                    <sup><p-tag >{{dt.totalRecords}}</p-tag></sup>
                 </h4>
             </ng-template>
             <ng-template pTemplate="header" >

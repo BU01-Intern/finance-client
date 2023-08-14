@@ -10,7 +10,7 @@ export class RoleService {
       id: "role1",
       titleRole: "Quản lý dự án",
       projectRole: "Quản lý dự án ABC",
-      status: true,
+      status: false,
       member: [
         {
           id: "member1",
@@ -39,7 +39,7 @@ export class RoleService {
           name: "Lê Hoàng C",
           email: "hoang.c@example.com",
           org: "Công ty XYZ",
-          status: true,
+          status: false,
         },
       ],
     },
@@ -69,7 +69,7 @@ export class RoleService {
       id: "role4",
       titleRole: "Quản lý sản xuất",
       projectRole: "Quản lý dây chuyền sản xuất",
-      status: true,
+      status: false,
       member: [
         {
           id: "member6",
@@ -84,7 +84,7 @@ export class RoleService {
       id: "role5",
       titleRole: "Kiểm tra chất lượng",
       projectRole: "Kiểm tra sản phẩm",
-      status: true,
+      status: false,
       member: [
         {
           id: "member7",
