@@ -14,7 +14,7 @@ export class ContractdetailService {
       "start": "15/06/2023",
       "finish": "01/12/2023",
       // "money" : "100.000.000 VNĐ",
-      "status": 0,
+      "status": 1,
       "tech": [
         {
           "project": "VSS_FINANCE_A",
@@ -296,7 +296,7 @@ export class ContractdetailService {
       "start": "15/03/2023",
       "finish": "23/10/2023",
       // "money" : "680.000.000 VNĐ",
-      "status": 1,
+      "status": 0,
       "tech": [
         {
           "project": "VSS_FINANCE_A",
