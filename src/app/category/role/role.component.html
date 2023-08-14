@@ -10,7 +10,8 @@
                 </h2>
                 <div class="p-input-icon-left p-inputgroup">
                     <i class="pi pi-search"></i>
-                    <input class="border-0 border-round-lg" (input)="dt.filterGlobal($any($event.target).value,'contains')" type="text" pInputText placeholder="Tìm kiếm" #filter />
+                    <input class="border-0 border-round-lg" (input)="dt.filterGlobal($any($event.target).value,'contains')" type="text"
+                        pInputText placeholder="Tìm kiếm" #filter />
                 </div>
             </div>
             <div>
@@ -29,11 +30,21 @@
         </ng-template>
         <ng-template pTemplate="body" let-role let-columns="columns" let-rowIndex="rowIndex">
             <tr (click)="navigateRoleDetail(role.id)">
-                <td style="max-width:10%">{{rowIndex + 1}}</td>
-                <td>{{role.id}}</td>
-                <td>{{role.titleRole}}</td>
-                <td>{{role.projectRole}}</td>
-                <td>
+                <td style="max-width:10%">
+                    <div>
+                        {{rowIndex + 1}}
+                    </div>
+                </td>
+                <td style="max-width: 22.5%;">
+                    <div class="text-overflow-ellipsis overflow-hidden">{{role.id}}</div>
+                </td>
+                <td style="max-width: 22.5%;">
+                    <div class="text-overflow-ellipsis overflow-hidden">{{role.titleRole}}</div>
+                </td>
+                <td style="max-width: 22.5%;">
+                    <div class="text-overflow-ellipsis overflow-hidden">{{role.titleRole}}</div>
+                </td>
+                <td style="max-width: 22.5%;">
                     <p-tag [value]="translateStatus(role.status)" [severity]="getSeverity(role.status)"></p-tag>
                 </td>
             </tr>
