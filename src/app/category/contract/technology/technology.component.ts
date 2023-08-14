@@ -29,12 +29,12 @@ export class TechnologyComponent {
   product: Tech[] = [];
   id: string = '';
   getSeverity(status: any): string {
-p    if (status === 'Hoạt động' || status === 0) {
+    if (status === 'Hoạt động' || status === 0) {
       return 'success';
     } else if (status === 'Không hoạt động' || status === 1) {
-      return 'warning';
-    } else {
       return 'danger';
+    } else {
+      return 'warning';
     }
   }
 
