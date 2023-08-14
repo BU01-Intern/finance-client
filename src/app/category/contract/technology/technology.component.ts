@@ -11,6 +11,11 @@ export class TechnologyComponent {
   constructor(private tech: ContractdetailService, private route: ActivatedRoute) {
     this.id = String(this.route.snapshot.paramMap.get('id'))
   }
+  customer!: Customer
+  first: number = 0;
+  rows: number = 10;
+  product: Tech[] = [];
+  id: string = '';
   ngOnInit() {
     this.product= this.tech.getTechById(this.id);
     
@@ -20,32 +25,23 @@ export class TechnologyComponent {
     }
     
     this.customer = this.tech.getCustomerById(this.id);
-    console.log(this.customer);
+    console.log(this.contract);
   }
   contract!:Contract
-  customer!: Customer
-  first: number = 0;
-  rows: number = 10;
-  product: Tech[] = [];
-  id: string = '';
+
   getSeverity(status: any): string {
-    if (status === 'Hoạt động') {
+    if (status === 0) {
       return 'success';
-    } else if (status === 'Không hoạt động') {
-      return 'warning';
-    } else {
+    } else if (status === 1) {
       return 'danger';
     }
+    return '';
   }
   getStatus(status: number): string {
-    switch (status) {
-      case 0:
-        return 'Hiệu lực';
-      case 1:
-        return 'Không hiệu lực';
-      default:
-        return '';
+    if(status === 0 ){
+      return 'Hiệu lực'
     }
+    return 'Không hiệu lực'
   }
 }
 interface Product {

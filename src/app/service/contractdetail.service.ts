@@ -14,7 +14,7 @@ export class ContractdetailService {
       "start": "15/06/2023",
       "finish": "01/12/2023",
       // "money" : "100.000.000 VNĐ",
-      "status": 0,
+      "status": 1,
       "tech": [
         {
           "project": "VSS_FINANCE_A",
@@ -462,7 +462,7 @@ export class ContractdetailService {
     return []
   }
   getContractDetail(code: string) {
-    return this.contracts.find(contract => contract.code);
+    return this.contracts.find(contract => contract.code === code);
   }
   getCustomerById(code: string): Customer | any{
     const temp = this.contracts.find(contract => contract.code === code)
