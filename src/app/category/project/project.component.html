@@ -1,8 +1,12 @@
 <div class="card">
-    <p-table class="p-element" [value]="projects" responsiveLayout="stack" [scrollable]="true" scrollHeight="flex" [rows]="10"
-    [rowsPerPageOptions]="[10, 25, 50]" [showCurrentPageReport]="true"
-    currentPageReportTemplate="{first} - {last} trong số {totalPages}" [paginator]="true"
-    [tableStyle]="{ 'min-width': '50rem' }" [rowHover]="true">
+    <p-table class="p-element" [rows]="10"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    currentPageReportTemplate="{first} - {last} of {totalRecords}"
+    [paginator]="true"
+    [value]="projects"
+    [tableStyle]="{ 'min-width': '100%' }"
+    [lazy]="false">
         <ng-template pTemplate="caption">
             <div class="flex align-items-center justify-content-between">
                 <h2 class="m-2 flex align-items-center">Dự án
@@ -35,7 +39,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-project let-i = "rowIndex">
-            <tr (click)="navigateProjectDetail(project.project_name)">
+            <tr (click)="navigateProjectDetail(project.id)">
                 <td>{{ i +1 }}</td>
                 <td>
                     <p-avatar label="VS" styleClass="mr-2" shape="circle"></p-avatar>
@@ -51,7 +55,7 @@
                         style="vertical-align: middle" />
                     <span class="ml-1 vertical-align-middle">{{ project.pm.name }}</span>
                 </td>
-                <td>{{ project.project_category}}</td>
+                <td>{{project.category}}</td>
                 <td>{{ project.customer}}</td>
                 <td><p-tag [value]="translateStatus(project.status)" [severity]="getSeverity(project.status)"></p-tag></td>
             </tr>

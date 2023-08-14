@@ -12,12 +12,13 @@ export class ProjectDetailComponent implements OnInit {
   first: number = 0;
   rows: number = 10;
   constructor(private activateRoute: ActivatedRoute, private projectService: ProjectService) {
-    this.project_name = String(this.activateRoute.snapshot.paramMap.get('project_name'))
+    this.projectId = String(this.activateRoute.snapshot.paramMap.get('id'))
   }
   staffs: Member[] = []
   numStaffs = 0
-  project_name: string = ""
+  projectId: string = ""
   project: Project | undefined = {
+    id: '',
     project_name: '',
     company: '',
     start_date: '',
@@ -33,9 +34,9 @@ export class ProjectDetailComponent implements OnInit {
   }
   ngOnInit(): void {
 
-    this.staffs = this.projectService.getMemberByName(this.project_name);
+    this.staffs = this.projectService.getMemberById(this.projectId);
     this.numStaffs = this.staffs.length;
-    this.project = this.projectService.getProjectByName(this.project_name);
+    this.project = this.projectService.getProjectById(this.projectId);
     
   }
   getSeverity(status: boolean|undefined) {
