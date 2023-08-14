@@ -9,7 +9,7 @@ export class ContractdetailService {
 
   contracts: Contract[] = [
     {
-      "code": "HD21092002",
+      "code": "HD02",
       "name": "Hợp đồng ban công nghệ",
       "start": "15/06/2023",
       "finish": "01/12/2023",
@@ -43,8 +43,8 @@ export class ContractdetailService {
       }
     },
     {
-      "code": "HD21092001",
-      "name": "Hợp đồng ban công nghệ",
+      "code": "HD01",
+      "name": "Hợp đồng ban nhân sự",
       "start": "20/06/2023",
       "finish": "02/12/2023",
       // "money" : "200.000.000 VNĐ",
@@ -71,8 +71,8 @@ export class ContractdetailService {
       }
     },
     {
-      "code": "HD21092003",
-      "name": "Hợp đồng ban công nghệ",
+      "code": "HD03",
+      "name": "Hợp đồng ban kỹ thuật",
       "start": "25/07/2023",
       "finish": "08/08/2023",
       // "money" : "300.000.000 VNĐ",
@@ -93,7 +93,7 @@ export class ContractdetailService {
       }
     },
     {
-      "code": "HD21092004",
+      "code": "HD04",
       "name": "Hợp đồng ban công nghệ",
       "start": "01/06/2023",
       "finish": "01/11/2023",
@@ -121,8 +121,8 @@ export class ContractdetailService {
       }
     },
     {
-      "code": "HD21092005",
-      "name": "Hợp đồng ban công nghệ",
+      "code": "HD05",
+      "name": "Hợp đồng ban kế toán",
       "start": "23/05/2023",
       "finish": "30/11/2023",
       // "money" : "500.000.000 VNĐ",
@@ -150,8 +150,8 @@ export class ContractdetailService {
       }
     },
     {
-      "code": "HD21092006",
-      "name": "Hợp đồng ban công nghệ",
+      "code": "HD06",
+      "name": "Hợp đồng ban kiểm toán",
       "start": "10/07/2023",
       "finish": "05/12/2023",
       // "money" : "150.000.000 VNĐ",
@@ -185,8 +185,8 @@ export class ContractdetailService {
       }
     },
     {
-      "code": "HD21092007",
-      "name": "Hợp đồng ban công nghệ",
+      "code": "HD07",
+      "name": "Hợp đồng ban tài chính",
       "start": "14/06/2023",
       "finish": "31/12/2023",
       // "money" : "600.000.000 VNĐ",
@@ -213,7 +213,7 @@ export class ContractdetailService {
       }
     },
     {
-      "code": "HD21092008",
+      "code": "HD08",
       "name": "Hợp đồng ban công nghệ",
       "start": "11/02/2023",
       "finish": "23/12/2023",
@@ -241,8 +241,8 @@ export class ContractdetailService {
       }
     },
     {
-      "code": "HD21092009",
-      "name": "Hợp đồng ban công nghệ",
+      "code": "HD09",
+      "name": "Hợp đồng ban nhân sự",
       "start": "19/04/2023",
       "finish": "19/11/2023",
       // "money" : "150.000.000 VNĐ",
@@ -269,8 +269,8 @@ export class ContractdetailService {
       }
     },
     {
-      "code": "HD21092010",
-      "name": "Hợp đồng ban công nghệ",
+      "code": "HD10",
+      "name": "Hợp đồng ban kiểm toán",
       "start": "06/06/2023",
       "finish": "01/10/2023",
       // "money" : "350.000.000 VNĐ",
@@ -291,8 +291,8 @@ export class ContractdetailService {
       }
     },
     {
-      "code": "HD21092011",
-      "name": "Hợp đồng ban công nghệ",
+      "code": "HD11",
+      "name": "Hợp đồng ban kế toán",
       "start": "15/03/2023",
       "finish": "23/10/2023",
       // "money" : "680.000.000 VNĐ",
@@ -319,8 +319,8 @@ export class ContractdetailService {
       }
     },
     {
-      "code": "HD21092012",
-      "name": "Hợp đồng ban công nghệ",
+      "code": "HD12",
+      "name": "Hợp đồng ban kỹ thuật",
       "start": "17/02/2023",
       "finish": "28/12/2023",
       // "money" : "340.000.000 VNĐ",
@@ -347,7 +347,7 @@ export class ContractdetailService {
       }
     },
     {
-      "code": "HD21092013",
+      "code": "HD13",
       "name": "Hợp đồng ban công nghệ",
       "start": "15/05/2023",
       "finish": "23/12/2023",
@@ -375,8 +375,8 @@ export class ContractdetailService {
       }
     },
     {
-      "code": "HD21092014",
-      "name": "Hợp đồng ban công nghệ",
+      "code": "HD14",
+      "name": "Hợp đồng ban tài chính",
       "start": "02/05/2023",
       "finish": "30/09/2023",
       // "money" : "710.000.000 VNĐ",
@@ -403,7 +403,7 @@ export class ContractdetailService {
       }
     },
     {
-      "code": "HD21092015",
+      "code": "HD15",
       "name": "Hợp đồng ban công nghệ",
       "start": "10/01/2023",
       "finish": "01/10/2023",
@@ -431,8 +431,8 @@ export class ContractdetailService {
       }
     },
     {
-      "code": "HD21092016",
-      "name": "Hợp đồng ban công nghệ",
+      "code": "HD16",
+      "name": "Hợp đồng ban kỹ thuật",
       "start": "11/06/2023",
       "finish": "11/12/2023",
       // "money" : "230.000.000 VNĐ",
