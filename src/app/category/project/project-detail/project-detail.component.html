@@ -5,8 +5,8 @@
             <p-avatar class="mt-4" size="xlarge" label="U" styleClass="mr-2"
                 [style]="{ 'background-color': 'blue', color: '#ffffff' }"></p-avatar>
             <div>
-                <h4>VSS-FINANCE(VSSFIN)</h4>
-                <p style="color: gray;" class="font-bold" >BU-01</p>
+                <h4>{{project?.project_name}}</h4>
+                <p style="color: gray;" class="font-bold" >{{project?.company}}</p>
             </div>
         </div>
         <p-divider></p-divider>
@@ -140,7 +140,7 @@
         <ng-template pTemplate="header" class="flex">
             <tr>
                 <th style="background-color: #f3f7fa!important;">#</th>
-                <th  pSortableColumn="name" style="width:auto; background-color:#f3f7fa">Nhân viên <i class=" pi pi-arrow-down"></i>
+                <th  pSortableColumn="employee.name" style="width:auto; background-color:#f3f7fa">Nhân viên <i class=" pi pi-arrow-down"></i>
                 </th>
                 <th  pSortableColumn="email" style="width:auto; background-color:#f3f7fa">Email <i class=" pi pi-arrow-down"></i></th>
                 <th  pSortableColumn="start_date" style="width:auto; background-color:#f3f7fa">Ngày bắt đầu <i class=" pi pi-arrow-down"></i>
@@ -157,12 +157,12 @@
                 <td><span class="p-column-title">PM</span>
                     <img [alt]="staffs.employee.name" [src]="staffs.employee.image" width="32"
                         style="vertical-align: middle" />
-                    <span class="ml-1 vertical-align-middle">{{staffs.employee.name}}</span>
+                    <span class="ml-1 vertical-align-middle text-overflow-ellipsis overflow-hidden white-space-nowrap max-w-12rem text-center">{{staffs.employee.name}}</span>
                 </td>
-                <td>{{staffs.email}}</td>
-                <td>{{staffs.start_date}}</td>
-                <td>{{staffs.finish_date}}</td>
-                <td>{{staffs.role}}
+                <td class="text-overflow-ellipsis overflow-hidden white-space-nowrap max-w-12rem ">{{staffs.email}}</td>
+                <td class="text-overflow-ellipsis overflow-hidden white-space-nowrap max-w-12rem ">{{staffs.start_date}}</td>
+                <td class="text-overflow-ellipsis overflow-hidden white-space-nowrap max-w-12rem ">{{staffs.finish_date}}</td>
+                <td class="text-overflow-ellipsis overflow-hidden white-space-nowrap max-w-12rem ">{{staffs.role}}
                 </td>
                 <td><p-tag [value]="translateStatus(staffs.status)" [severity]="getSeverity(staffs.status)"></p-tag></td>
             </tr>
