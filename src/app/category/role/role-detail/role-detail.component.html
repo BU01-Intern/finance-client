@@ -22,45 +22,54 @@
             <div class="grid col-2">
                 <span class="md:col-6 font-light">Trạng thái</span>
                 <span class="md:col-6 pt-1">
-                    <p-tag class="pb-1" [value]="translateRoleStatus(role?.status)" [severity]="getSeverity(role?.status)"></p-tag>
+                    <p-tag class="pb-1" [value]="translateRoleStatus(role?.status)"
+                        [severity]="getSeverity(role?.status)"></p-tag>
                 </span>
             </div>
         </div>
     </div>
     <div>
-        <p-table [value]="employees" responsiveLayout="stack" [scrollable]="true" 
-         [rows]="10" [rowsPerPageOptions]="[10, 25, 50]" [showCurrentPageReport]="true"
-        currentPageReportTemplate="{first} - {last} trong số {totalPages}" [paginator]="true"
+        <p-table [value]="employees" responsiveLayout="stack" [scrollable]="true" [rows]="10"
+            [rowsPerPageOptions]="[10, 25, 50]" [showCurrentPageReport]="true"
+            currentPageReportTemplate="{first} - {last} trong số {totalPages}" [paginator]="true"
             [tableStyle]="{ 'min-width': '100%' }" [rowHover]="true" #dt>
             <ng-template pTemplate="caption">
                 <h4 class="m-0">Danh sách nhân viên thuộc Roles
-                    <sup><p-tag >{{dt.totalRecords}}</p-tag></sup>
+                    <sup><p-tag>{{dt.totalRecords}}</p-tag></sup>
                 </h4>
             </ng-template>
-            <ng-template pTemplate="header" >
+            <ng-template pTemplate="header">
                 <tr>
                     <th style="max-width: 10%;">#</th>
-                    <th style="max-width: 30%;" pSortableColumn="name">Nhân viên <p-sortIcon field="name"></p-sortIcon></th>
-                    <th pSortableColumn="email">Email<p-sortIcon field="email"></p-sortIcon></th>
-                    <th pSortableColumn="org">Đơn vị <p-sortIcon field="org"></p-sortIcon></th>
-                    <th pSortableColumn="status">Trạng thái<p-sortIcon field="status"></p-sortIcon></th>
+                    <th style="max-width: 30%;" pSortableColumn="name">Nhân viên <p-sortIcon field="name"></p-sortIcon>
+                    </th>
+                    <th style="max-width: 25%;" pSortableColumn="email">Email<p-sortIcon field="email"></p-sortIcon></th>
+                    <th style="max-width: 25%;" pSortableColumn="org">Đơn vị <p-sortIcon field="org"></p-sortIcon></th>
+                    <th style="max-width: 10%;" pSortableColumn="status">Trạng thái<p-sortIcon field="status"></p-sortIcon></th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-employees let-rowIndex ="rowIndex">
+            <ng-template pTemplate="body" let-employees let-rowIndex="rowIndex">
                 <tr>
-                    <td class="col-1" style="max-width: 10%;">{{rowIndex+1}}</td>
-                    <td class="col-" style="max-width: 30%;">
+                    <td style="max-width: 10%;">{{rowIndex+1}}</td>
+                    <td style="max-width: 30%;">
                         <div class="flex">
-                            <p-avatar image="https://images-na.ssl-images-amazon.com/images/S/pv-target-images/ae4816cade1a5b7f29787d0b89610132c72c7747041481c6619b9cc3302c0101._RI_TTW_.jpg" shape="circle" size="large"></p-avatar>
+                            <p-avatar
+                                image="https://images-na.ssl-images-amazon.com/images/S/pv-target-images/ae4816cade1a5b7f29787d0b89610132c72c7747041481c6619b9cc3302c0101._RI_TTW_.jpg"
+                                shape="circle" size="large"></p-avatar>
                             <div class="mt-1 ml-2">
-                                <div>{{employees.name}}</div>
-                                <div>{{employees.id}}</div>
+                                <div class="text-overflow-ellipsis overflow-hidden">{{employees.name}}</div>
+                                <div class="text-overflow-ellipsis overflow-hidden">{{employees.id}}</div>
                             </div>
                         </div>
                     </td>
-                    <td class="">{{employees.email}}</td>
-                    <td class="">{{employees.org}}</td>
-                    <td><p-tag [value]="translateStatus(employees.status)" [severity]="getSeverity(employees.status)"></p-tag></td>
+                    <td style="max-width: 25%;">
+                        <div class="text-overflow-ellipsis overflow-hidden">{{employees.email}}</div>
+                    </td>
+                    <td style="max-width: 25%;">
+                        <div class="text-overflow-ellipsis overflow-hidden">{{employees.org}}</div>
+                    </td>
+                    <td style="max-width: 10%;"><p-tag [value]="translateStatus(employees.status)"
+                            [severity]="getSeverity(employees.status)"></p-tag></td>
                 </tr>
             </ng-template>
         </p-table>
