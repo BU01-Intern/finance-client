@@ -40,18 +40,18 @@
             </ng-template>
             <ng-template pTemplate="header">
                 <tr>
-                    <th style="max-width: 10%;">#</th>
-                    <th style="max-width: 30%;" pSortableColumn="name">Nhân viên <p-sortIcon field="name"></p-sortIcon>
+                    <th style="max-width: 5%;">#</th>
+                    <th style="max-width: 25%;" pSortableColumn="name">Nhân viên <p-sortIcon field="name"></p-sortIcon>
                     </th>
                     <th style="max-width: 25%;" pSortableColumn="email">Email<p-sortIcon field="email"></p-sortIcon></th>
                     <th style="max-width: 25%;" pSortableColumn="org">Đơn vị <p-sortIcon field="org"></p-sortIcon></th>
-                    <th style="max-width: 10%;" pSortableColumn="status">Trạng thái<p-sortIcon field="status"></p-sortIcon></th>
+                    <th style="max-width: 20%;" pSortableColumn="status">Trạng thái<p-sortIcon field="status"></p-sortIcon></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-employees let-rowIndex="rowIndex">
                 <tr>
-                    <td style="max-width: 10%;">{{rowIndex+1}}</td>
-                    <td style="max-width: 30%;">
+                    <td style="max-width: 5%;">{{rowIndex+1}}</td>
+                    <td style="max-width: 25%;">
                         <div class="flex">
                             <p-avatar
                                 image="https://images-na.ssl-images-amazon.com/images/S/pv-target-images/ae4816cade1a5b7f29787d0b89610132c72c7747041481c6619b9cc3302c0101._RI_TTW_.jpg"
@@ -68,7 +68,7 @@
                     <td style="max-width: 25%;">
                         <div class="text-overflow-ellipsis overflow-hidden">{{employees.org}}</div>
                     </td>
-                    <td style="max-width: 10%;"><p-tag [value]="translateStatus(employees.status)"
+                    <td style="max-width: 20%;"><p-tag [value]="translateStatus(employees.status)"
                             [severity]="getSeverity(employees.status)"></p-tag></td>
                 </tr>
             </ng-template>
