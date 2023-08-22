@@ -6,7 +6,7 @@ import { RoleComponent } from './role/role.component';
 import { RoleDetailComponent } from './role/role-detail/role-detail.component';
 import { StaffComponent } from './staff/staff.component';
 import { DetailComponent } from './staff/detail/detail.component';
-import { CostImplicationsComponent } from './cost-implications/cost-implications.component';
+import { ExpenseComponent } from './expense/expense.component';
 import { ContractComponent } from './contract/contract.component';
 import { TechnologyComponent } from './contract/technology/technology.component';
 import { ProjectComponent } from './project/project.component';
@@ -85,8 +85,8 @@ const routes: Routes = [
         ],
       },
       {
-        path: 'cost_implications',
-        component: CostImplicationsComponent,
+        path: 'expense',
+        component: ExpenseComponent,
         data: {
           breadcrumb: 'Khoản mục chi phí',
         },
