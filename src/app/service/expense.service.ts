@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export interface Expense {
   id: number;
   name?: string;
-  accountNumber?: number;
+  accountNumber?: string;
   type?: string;
   isDistributed?: boolean;
   status?: number;
@@ -31,7 +31,7 @@ export class ExpenseService {
 
   createExpense(
     name: string,
-    accountNumber: number,
+    accountNumber: string,
     type: string,
     isDistributed: boolean,
     status: number
@@ -49,7 +49,7 @@ export class ExpenseService {
   updateExpense(
     id: number,
     name: string,
-    accountNumber: number,
+    accountNumber: string,
     type: string,
     isDistributed: boolean,
     status: number

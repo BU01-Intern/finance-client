@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import * as XLSX from 'xlsx';
 import { Expense, ExpenseService } from 'src/app/service/expense.service';
-interface UploadEvent {
-  originalEvent: Event;
-  files: File[];
-}
+
 @Component({
   selector: 'app-expense',
   templateUrl: './expense.component.html',
@@ -56,9 +53,7 @@ export class ExpenseComponent implements OnInit {
     this.formData = {
       id: expense.id,
       name: expense.name ? expense.name : '',
-      accountNumber: expense.accountNumber
-        ? expense.accountNumber.toString()
-        : '',
+      accountNumber: expense.accountNumber ? expense.accountNumber : '',
       type: expense.type ? expense.type : '',
       isDistributed:
         expense.isDistributed !== null ? expense.isDistributed : false,
@@ -72,7 +67,7 @@ export class ExpenseComponent implements OnInit {
     this.expenseDialog = false;
     this.submitted = false;
   }
-  onBasicUploadAuto(event: UploadEvent) {
+  onBasicUploadAuto() {
     this.messageService.add({
       severity: 'info',
       summary: 'Success',
@@ -113,7 +108,7 @@ export class ExpenseComponent implements OnInit {
           .updateExpense(
             this.formData.id,
             this.formData.name,
-            parseInt(this.formData.accountNumber),
+            this.formData.accountNumber,
             this.formData.type,
             this.formData.isDistributed,
             this.formData.status
@@ -129,7 +124,7 @@ export class ExpenseComponent implements OnInit {
         this.expenseService
           .createExpense(
             this.formData.name,
-            parseInt(this.formData.accountNumber),
+            this.formData.accountNumber,
             this.formData.type,
             this.formData.isDistributed,
             this.formData.status
