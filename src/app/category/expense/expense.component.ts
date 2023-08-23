@@ -57,7 +57,8 @@ export class ExpenseComponent implements OnInit {
         ? expense.accountNumber.toString()
         : '',
       type: expense.type ? expense.type : '',
-      isDistributed: expense.isDistributed ? expense.isDistributed : false,
+      isDistributed:
+        expense.isDistributed !== null ? expense.isDistributed : false,
       status: expense.status ? expense.status : 0,
     };
     this.submitted = false;

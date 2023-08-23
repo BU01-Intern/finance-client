@@ -12,7 +12,13 @@
     [rowsPerPageOptions]="[10, 25, 50]"
     [showCurrentPageReport]="true"
     [lazy]="false"
-    [globalFilterFields]="['name', 'accountNumber', 'type', 'isDistributed', 'status']"
+    [globalFilterFields]="[
+      'name',
+      'accountNumber',
+      'type',
+      'isDistributed',
+      'status'
+    ]"
   >
     <ng-template pTemplate="caption">
       <h3>
@@ -85,7 +91,7 @@
         <td>{{ expense.name }}</td>
         <td>{{ expense.accountNumber }}</td>
         <td>{{ expense.type }}</td>
-        <td>{{ expense.isDistributed}}</td>
+        <td>{{ expense.isDistributed ? "Phân bổ" : "Không phân bổ" }}</td>
         <td>
           <p-tag
             [value]="getStatus(expense.status)"
@@ -166,17 +172,27 @@
     </div>
     <div class="field">
       <label for="isDistributed">Loại phân bổ</label>
-      <input
-        type="text"
-        pInputText
-        id="isDistributed"
-        [(ngModel)]="formData.isDistributed"
-        required
-        autofocus
-      />
-      <small class="p-error" *ngIf="submitted && !formData.isDistributed"
-        >Loại phân bổ là bắt buộc.</small
-      >
+      <div class="flex flex-wrap gap-3">
+        <div class="flex align-items-center">
+          <p-radioButton
+            name="isDistributed"
+            [value]="true"
+            [(ngModel)]="formData.isDistributed"
+            inputId="dist1"
+          ></p-radioButton>
+          <label for="dist1" class="ml-2">Phân bổ</label>
+        </div>
+
+        <div class="flex align-items-center">
+          <p-radioButton
+            name="isDistributed"
+            [value]="false"
+            [(ngModel)]="formData.isDistributed"
+            inputId="dist2"
+          ></p-radioButton>
+          <label for="dist2" class="ml-2">Không phân bổ</label>
+        </div>
+      </div>
 
       <div class="field">
         <label for="status">Trạng thái</label>
@@ -187,14 +203,8 @@
         >
           <ng-template pTemplate="selectedItem">
             <p-tag
-              [value]="
-                getStatus(formData.status ? formData.status : 0)
-              "
-              [severity]="
-                getSeverity(
-                  formData.status ? formData.status : 0
-                )
-              "
+              [value]="getStatus(formData.status ? formData.status : 0)"
+              [severity]="getSeverity(formData.status ? formData.status : 0)"
             ></p-tag>
           </ng-template>
           <ng-template let-option pTemplate="item">
