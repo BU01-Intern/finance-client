@@ -33,7 +33,7 @@
           <input
             pInputText
             type="text"
-            (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+            (input)="filterExpenses(filter.value)"
             placeholder="Tìm kiếm"
             #filter
           />
@@ -184,29 +184,30 @@
           <label for="dist2" class="ml-2">Không phân bổ</label>
         </div>
       </div>
-      </div>
+    </div>
 
-      <div class="field">
-        <label for="status">Trạng thái</label>
-        <p-dropdown
-          [(ngModel)]="formData.status"
-          inputId="status"
-          [options]="statuses"
-        >
-          <ng-template pTemplate="selectedItem">
-            <p-tag
-              [value]="getStatus(formData.status ? formData.status : 0)"
-              [severity]="getSeverity(formData.status ? formData.status : 0)"
-            ></p-tag>
-          </ng-template>
-          <ng-template let-option pTemplate="item">
-            <p-tag
-              [value]="option.label"
-              [severity]="getSeverity(option.value)"
-            ></p-tag>
-          </ng-template>
-        </p-dropdown>
-      </div>
+    <div class="field">
+      <label for="status">Trạng thái</label>
+      <p-dropdown
+        appendTo="body"
+        [(ngModel)]="formData.status"
+        inputId="status"
+        [options]="statuses"
+      >
+        <ng-template pTemplate="selectedItem">
+          <p-tag
+            [value]="getStatus(formData.status ? formData.status : 0)"
+            [severity]="getSeverity(formData.status ? formData.status : 0)"
+          ></p-tag>
+        </ng-template>
+        <ng-template let-option pTemplate="item">
+          <p-tag
+            [value]="option.label"
+            [severity]="getSeverity(option.value)"
+          ></p-tag>
+        </ng-template>
+      </p-dropdown>
+    </div>
   </ng-template>
   <ng-template pTemplate="footer">
     <button
