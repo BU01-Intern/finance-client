@@ -9,10 +9,7 @@ export interface Expense {
   isDistributed?: boolean;
   status?: number;
 }
-export interface UploadEvent {
-  originalEvent: Event;
-  files: File[];
-}
+
 @Injectable({
   providedIn: 'root',
 })
