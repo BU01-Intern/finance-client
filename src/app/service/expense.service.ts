@@ -19,8 +19,14 @@ export class ExpenseService {
   constructor(private http: HttpClient) {}
 
   getExpenses() {
-    const body = { name: '' };
-    return this.http.post<any>(`${this.baseUrl}/search`, body);
+    return this.http.post<any>(`${this.baseUrl}/search`, {});
+  }
+
+  searchExpense(name?: string, accountNumber?: string) {
+    return this.http.post<any>(`${this.baseUrl}/search`, {
+      name: name,
+      accountNumber: accountNumber,
+    });
   }
 
   createExpense(

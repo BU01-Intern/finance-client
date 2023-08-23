@@ -27,8 +27,9 @@
           <input
             pInputText
             type="text"
-            (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+            (input)="filterExpenses(filter.value)"
             placeholder="Tìm kiếm"
+            #filter
           />
           <i class="pi pi-filter-fill"></i>
         </span>

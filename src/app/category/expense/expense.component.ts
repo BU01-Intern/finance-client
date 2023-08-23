@@ -142,6 +142,12 @@ export class ExpenseComponent implements OnInit {
     }
   }
 
+  filterExpenses(str: string) {
+    this.expenseService
+      .searchExpense(str, str)
+      .subscribe((data) => (this.expenses = data.data));
+  }
+
   exportToExcel() {
     const fileName = 'danh-sach-khoan-muc-chi-phi.xlsx';
     const sheetName = 'Danh sách khoản mục chi phí';
@@ -173,28 +179,26 @@ export class ExpenseComponent implements OnInit {
     XLSX.utils.book_append_sheet(wb, ws, sheetName);
     XLSX.writeFile(wb, fileName);
   }
+
   getStatus(trang_thai: number): string {
     switch (trang_thai) {
       case 0:
         return 'Không hoạt động';
-
       case 2:
         return 'Hoạt động';
-
       case 1:
         return 'Tạm dừng';
       default:
         return '';
     }
   }
+
   getSeverity(trang_thai: number) {
     switch (trang_thai) {
       case 0:
         return 'danger';
-
       case 2:
         return 'success';
-
       case 1:
         return 'warning';
       default:
