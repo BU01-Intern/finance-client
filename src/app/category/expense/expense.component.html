@@ -14,7 +14,7 @@
     [lazy]="false"
     [globalFilterFields]="[
       'name',
-      'accountNumber',
+      'accountNumberuntNumber',
       'type',
       'isDistributed',
       'status'
@@ -33,11 +33,10 @@
           <input
             pInputText
             type="text"
-            (input)="filterExpenses(filter.value)"
+            (input)="dt.filterGlobal($any($event.target).value, 'contains')"
             placeholder="Tìm kiếm"
             #filter
           />
-          <i class="pi pi-filter-fill"></i>
         </span>
         <button
           pButton
@@ -53,15 +52,7 @@
           styleClass="p-button-outlined"
           (click)="exportToExcel()"
         ></p-button>
-        <p-fileUpload
-          mode="basic"
-          accept="image/*"
-          [maxFileSize]="1000000"
-          label="Tải lên tệp tin"
-          chooseLabel="Tải lên tệp tin"
-          icon="pi pi-download"
-          styleClass="p-button-outlined"
-        ></p-fileUpload>
+        <p-fileUpload mode="basic" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" [maxFileSize]="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true" chooseLabel="Tải lên tệp tin"  styleClass="p-button-outlined"></p-fileUpload>
       </div>
     </ng-template>
     <ng-template pTemplate="header" class="flex">
@@ -70,16 +61,16 @@
         <th pSortableColumn="name" style="min-width: 12rem">
           Khoản mục <p-sortIcon field="name"></p-sortIcon>
         </th>
-        <th pSortableColumn="accountNumber" style="min-width: 12em">
+        <th pSortableColumn="accountNumber" style="min-width: 10em">
           Số tài khoản <p-sortIcon field="accountNumber"></p-sortIcon>
         </th>
         <th pSortableColumn="type" style="min-width: 12rem">
           Loại chi phí <p-sortIcon field="type"></p-sortIcon>
         </th>
-        <th pSortableColumn="isDistributed" style="min-width: 12rem">
+        <th pSortableColumn="isDistributed" style="min-width: 10rem">
           Loại phân bố <p-sortIcon field="isDistributed"></p-sortIcon>
         </th>
-        <th pSortableColumn="status" style="min-width: 10rem">
+        <th pSortableColumn="status" style="min-width: 8rem">
           Trạng thái<p-sortIcon field="status"></p-sortIcon>
         </th>
         <th>Thao tác</th>
@@ -193,6 +184,7 @@
           <label for="dist2" class="ml-2">Không phân bổ</label>
         </div>
       </div>
+      </div>
 
       <div class="field">
         <label for="status">Trạng thái</label>
@@ -215,7 +207,6 @@
           </ng-template>
         </p-dropdown>
       </div>
-    </div>
   </ng-template>
   <ng-template pTemplate="footer">
     <button

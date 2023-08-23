@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import * as XLSX from 'xlsx';
 import { Expense, ExpenseService } from 'src/app/service/expense.service';
-
+interface UploadEvent {
+  originalEvent: Event;
+  files: File[];
+}
 @Component({
   selector: 'app-expense',
   templateUrl: './expense.component.html',
@@ -69,7 +72,9 @@ export class ExpenseComponent implements OnInit {
     this.expenseDialog = false;
     this.submitted = false;
   }
-
+  onBasicUploadAuto(event: UploadEvent) {
+    this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode' });
+}
   deleteExpense(expense: Expense) {
     this.confirmationService.confirm({
       message: 'Bạn có chắc chắn muốn xóa ' + expense.name + '?',
