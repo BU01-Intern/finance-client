@@ -73,8 +73,12 @@ export class ExpenseComponent implements OnInit {
     this.submitted = false;
   }
   onBasicUploadAuto(event: UploadEvent) {
-    this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Auto Mode' });
-}
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Success',
+      detail: 'File Uploaded with Auto Mode',
+    });
+  }
   deleteExpense(expense: Expense) {
     this.confirmationService.confirm({
       message: 'Bạn có chắc chắn muốn xóa ' + expense.name + '?',
@@ -103,7 +107,7 @@ export class ExpenseComponent implements OnInit {
   saveExpense() {
     this.submitted = true;
 
-    if (this.formData.name?.trim()) {
+    if (this.formData.name.trim() && this.formData.accountNumber) {
       if (this.formData.id) {
         this.expenseService
           .updateExpense(

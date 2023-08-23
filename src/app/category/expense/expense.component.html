@@ -52,7 +52,17 @@
           styleClass="p-button-outlined"
           (click)="exportToExcel()"
         ></p-button>
-        <p-fileUpload mode="basic" name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" [maxFileSize]="1000000" (onUpload)="onBasicUploadAuto($event)" [auto]="true" chooseLabel="Tải lên tệp tin"  styleClass="p-button-outlined"></p-fileUpload>
+        <p-fileUpload
+          mode="basic"
+          name="demo[]"
+          url="https://www.primefaces.org/cdn/api/upload.php"
+          accept="image/*"
+          [maxFileSize]="1000000"
+          (onUpload)="onBasicUploadAuto($event)"
+          [auto]="true"
+          chooseLabel="Tải lên tệp tin"
+          styleClass="p-button-outlined"
+        ></p-fileUpload>
       </div>
     </ng-template>
     <ng-template pTemplate="header" class="flex">
@@ -137,6 +147,7 @@
       <label for="accountNumber">Số tài khoản</label>
       <input
         type="text"
+        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
         pInputText
         id="accountNumber"
         [(ngModel)]="formData.accountNumber"
@@ -154,12 +165,8 @@
         pInputText
         id="type"
         [(ngModel)]="formData.type"
-        required
         autofocus
       />
-      <small class="p-error" *ngIf="submitted && !formData.type"
-        >Loại chi phí là bắt buộc.</small
-      >
     </div>
     <div class="field">
       <label for="isDistributed">Loại phân bổ</label>
