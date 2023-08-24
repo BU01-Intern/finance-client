@@ -30,7 +30,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { PaginatorModule } from 'primeng/paginator';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
-import { CostImplicationsComponent } from './cost-implications/cost-implications.component';
+import { ExpenseComponent } from './expense/expense.component';
 import { ContractComponent } from './contract/contract.component';
 import { TechnologyComponent } from './contract/technology/technology.component';
 import { ProjectComponent } from './project/project.component';
@@ -44,7 +44,7 @@ import { ProjectDetailComponent } from './project/project-detail/project-detail.
     RoleComponent,
     StaffComponent,
     DetailComponent,
-    CostImplicationsComponent,
+    ExpenseComponent,
     ContractComponent,
     TechnologyComponent,
     ProjectComponent,
@@ -85,7 +85,7 @@ import { ProjectDetailComponent } from './project/project-detail/project-detail.
     RoleDetailComponent,
     StaffComponent,
     DetailComponent,
-    CostImplicationsComponent,
+    ExpenseComponent,
     ContractComponent,
     TechnologyComponent,
     ProjectComponent,

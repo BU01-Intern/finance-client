@@ -14,7 +14,7 @@
         },
         {
           "name": "Khoản mục chi phí",
-          "routerLink": "/category/cost_implications"
+          "routerLink": "/category/expense"
         },
         {
           "name": "Dự án",
