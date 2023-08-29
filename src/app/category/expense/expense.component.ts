@@ -154,35 +154,7 @@ export class ExpenseComponent implements OnInit {
   }
 
   exportToExcel() {
-    const fileName = 'danh-sach-khoan-muc-chi-phi.xlsx';
-    const sheetName = 'Danh sách khoản mục chi phí';
-
-    const data: any[][] = [
-      [
-        '#',
-        'Khoản mục',
-        'Số tài khoản',
-        'Loại chi phí',
-        'Loại phân bổ',
-        'Trạng thái',
-      ],
-    ];
-
-    this.expenses.forEach((expense, index) => {
-      data.push([
-        index + 1,
-        expense.name,
-        expense.accountNumber,
-        expense.type,
-        expense.isDistributed,
-        this.getStatus(expense.status ? expense.status : 0),
-      ]);
-    });
-
-    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(data);
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, sheetName);
-    XLSX.writeFile(wb, fileName);
+    window.open(`${this.expenseService.baseUrl}/download`, '_self');
   }
 
   getStatus(trang_thai: number): string {
