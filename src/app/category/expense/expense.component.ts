@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
-import * as XLSX from 'xlsx';
 import { Expense, ExpenseService } from 'src/app/service/expense.service';
 
 @Component({
@@ -11,12 +10,13 @@ import { Expense, ExpenseService } from 'src/app/service/expense.service';
 })
 export class ExpenseComponent implements OnInit {
   first: number = 0;
-  rows: number = 10;
   expenseDialog: boolean = false;
   formData: any;
   expenses!: Expense[];
   submitted: boolean = false;
   statuses!: any[];
+  totalRecord = 0;
+  searchText = '';
 
   constructor(
     private expenseService: ExpenseService,
@@ -25,15 +25,24 @@ export class ExpenseComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.expenseService
-      .getExpenses()
-      .subscribe((data) => (this.expenses = data.data));
+    this.loadExpenses();
 
     this.statuses = [
       { label: 'Hoạt động', value: 2 },
       { label: 'Tạm dừng', value: 1 },
       { label: 'Không hoạt động', value: 0 },
     ];
+  }
+
+  loadExpenses(event: any = { first: 0, rows: 10 }) {
+    let page = Math.floor(event.first / event.rows) + 1;
+    let size = event.rows;
+    this.expenseService
+      .searchExpense(this.searchText, page, size)
+      .subscribe((res) => {
+        this.expenses = res.data;
+        this.totalRecord = res.totalRecord;
+      });
   }
 
   openNewDialog() {
@@ -145,12 +154,6 @@ export class ExpenseComponent implements OnInit {
           .subscribe((data) => (this.expenses = data.data));
       }, 3000);
     }
-  }
-
-  filterExpenses(str: string) {
-    this.expenseService
-      .searchExpense(str, str)
-      .subscribe((data) => (this.expenses = data.data));
   }
 
   exportToExcel() {

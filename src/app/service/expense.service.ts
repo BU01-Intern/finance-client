@@ -22,11 +22,15 @@ export class ExpenseService {
     return this.http.post<any>(`${this.baseUrl}/search`, {});
   }
 
-  searchExpense(name?: string, accountNumber?: string) {
-    return this.http.post<any>(`${this.baseUrl}/search`, {
-      name: name,
-      accountNumber: accountNumber,
-    });
+  searchExpense(searchText: string, page: number, size: number) {
+    const body: any = {
+      name: searchText,
+      accountNumber: searchText,
+      page: page,
+      size: size,
+    };
+
+    return this.http.post<any>(`${this.baseUrl}/search`, body);
   }
 
   createExpense(
