@@ -17,6 +17,7 @@ export class ExpenseComponent implements OnInit {
   statuses!: any[];
   totalRecord = 0;
   searchText = '';
+  loading = true;
 
   constructor(
     private expenseService: ExpenseService,
@@ -35,6 +36,7 @@ export class ExpenseComponent implements OnInit {
   }
 
   loadExpenses(event: any = { first: 0, rows: 10 }) {
+    this.loading = true
     let page = Math.floor(event.first / event.rows) + 1;
     let size = event.rows;
     this.expenseService
@@ -42,6 +44,7 @@ export class ExpenseComponent implements OnInit {
       .subscribe((res) => {
         this.expenses = res.data;
         this.totalRecord = res.totalRecord;
+        this.loading = false
       });
   }
 
