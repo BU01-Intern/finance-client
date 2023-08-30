@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
+import { Table } from 'primeng/table';
 import { Expense, ExpenseService } from 'src/app/service/expense.service';
 
 @Component({
@@ -8,16 +9,22 @@ import { Expense, ExpenseService } from 'src/app/service/expense.service';
   styleUrls: ['./expense.component.scss'],
   providers: [MessageService, ConfirmationService],
 })
-export class ExpenseComponent implements OnInit {
+export class ExpenseComponent implements AfterViewInit {
   first: number = 0;
   expenseDialog: boolean = false;
   formData: any;
   expenses!: Expense[];
   submitted: boolean = false;
-  statuses!: any[];
+  statuses = [
+    { label: 'Hoạt động', value: 2 },
+    { label: 'Tạm dừng', value: 1 },
+    { label: 'Không hoạt động', value: 0 },
+  ];
   totalRecord = 0;
   searchText = '';
   loading = true;
+
+  @ViewChild('dt') tableRef!: Table;
 
   constructor(
     private expenseService: ExpenseService,
@@ -25,27 +32,37 @@ export class ExpenseComponent implements OnInit {
     private confirmationService: ConfirmationService
   ) {}
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.loadExpenses();
-
-    this.statuses = [
-      { label: 'Hoạt động', value: 2 },
-      { label: 'Tạm dừng', value: 1 },
-      { label: 'Không hoạt động', value: 0 },
-    ];
   }
 
-  loadExpenses(event: any = { first: 0, rows: 10 }) {
-    this.loading = true
+  loadExpenses(
+    event: any = { first: this.tableRef._first, rows: this.tableRef._rows }
+  ) {
+    this.loading = true;
     let page = Math.floor(event.first / event.rows) + 1;
     let size = event.rows;
+    let sorts: string[] = [];
+    let currentSort = this.getCurrentSort();
+    if (currentSort) {
+      sorts.push(currentSort);
+    }
     this.expenseService
-      .searchExpense(this.searchText, page, size)
+      .searchExpense(this.searchText, page, size, sorts)
       .subscribe((res) => {
         this.expenses = res.data;
         this.totalRecord = res.totalRecord;
-        this.loading = false
+        this.loading = false;
       });
+  }
+
+  getCurrentSort(): string {
+    let property = this.tableRef._sortField;
+    if (!property) {
+      return '';
+    }
+    let direction = this.tableRef._sortOrder === 1 ? 'ASC' : 'DESC';
+    return property + '-' + direction;
   }
 
   openNewDialog() {
@@ -79,6 +96,7 @@ export class ExpenseComponent implements OnInit {
     this.expenseDialog = false;
     this.submitted = false;
   }
+
   onBasicUploadAuto() {
     this.messageService.add({
       severity: 'info',
@@ -86,6 +104,7 @@ export class ExpenseComponent implements OnInit {
       detail: 'File Uploaded with Auto Mode',
     });
   }
+
   deleteExpense(expense: Expense) {
     this.confirmationService.confirm({
       message: 'Bạn có chắc chắn muốn xóa ' + expense.name + '?',
@@ -103,9 +122,7 @@ export class ExpenseComponent implements OnInit {
         });
 
         setTimeout(() => {
-          this.expenseService
-            .getExpenses()
-            .subscribe((data) => (this.expenses = data.data));
+          this.loadExpenses();
         }, 3000);
       },
     });
@@ -152,9 +169,7 @@ export class ExpenseComponent implements OnInit {
 
       this.expenseDialog = false;
       setTimeout(() => {
-        this.expenseService
-          .getExpenses()
-          .subscribe((data) => (this.expenses = data.data));
+        this.loadExpenses();
       }, 3000);
     }
   }

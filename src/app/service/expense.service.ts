@@ -22,13 +22,22 @@ export class ExpenseService {
     return this.http.post<any>(`${this.baseUrl}/search`, {});
   }
 
-  searchExpense(searchText: string, page: number, size: number) {
+  searchExpense(
+    searchText: string,
+    page: number,
+    size: number,
+    sorts?: string[]
+  ) {
     const body: any = {
       name: searchText,
       accountNumber: searchText,
       page: page,
       size: size,
     };
+
+    if (sorts && sorts.length > 0) {
+      body.sorts = sorts;
+    }
 
     return this.http.post<any>(`${this.baseUrl}/search`, body);
   }
