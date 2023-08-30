@@ -111,14 +111,14 @@ export class ExpenseComponent implements AfterViewInit {
       header: 'Xác nhận',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.expenseService
-          .deleteExpense(expense.id)
-          .subscribe((data) => console.log(data));
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Expense Deleted',
-          life: 3000,
+        this.expenseService.deleteExpense(expense.id).subscribe((data) => {
+          console.log(data);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Successful',
+            detail: 'Expense Deleted',
+            life: 3000,
+          });
         });
 
         setTimeout(() => {
@@ -142,13 +142,15 @@ export class ExpenseComponent implements AfterViewInit {
             this.formData.isDistributed,
             this.formData.status
           )
-          .subscribe((data) => console.log(data));
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Expense Updated',
-          life: 3000,
-        });
+          .subscribe((data) => {
+            console.log(data);
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Successful',
+              detail: 'Expense Updated',
+              life: 3000,
+            });
+          });
       } else {
         this.expenseService
           .createExpense(
@@ -158,13 +160,15 @@ export class ExpenseComponent implements AfterViewInit {
             this.formData.isDistributed,
             this.formData.status
           )
-          .subscribe((data) => console.log(data));
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Expense Created',
-          life: 3000,
-        });
+          .subscribe((data) => {
+            console.log(data);
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Successful',
+              detail: 'Expense Created',
+              life: 3000,
+            });
+          });
       }
 
       this.expenseDialog = false;

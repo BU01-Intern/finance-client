@@ -75,7 +75,6 @@ export class ExpenseService {
       isDistributed: isDistributed,
       status: status,
     };
-    console.log(body);
     return this.http.put<any>(`${this.baseUrl}/update`, body);
   }
 
