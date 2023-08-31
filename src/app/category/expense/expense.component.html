@@ -4,38 +4,35 @@
     #dt
     [value]="expenses"
     [paginator]="true"
-    [rows]="rows"
+    [rows]="10"
     [tableStyle]="{ 'min-width': '100%' }"
     [rowHover]="true"
     dataKey="id"
     currentPageReportTemplate="{first} - {last} trong số {totalRecords}"
     [rowsPerPageOptions]="[10, 25, 50]"
     [showCurrentPageReport]="true"
-    [lazy]="false"
-    [globalFilterFields]="[
-      'name',
-      'accountNumber',
-      'type',
-      'isDistributed',
-      'status'
-    ]"
+    [lazy]="true"
+    (onLazyLoad)="loadExpenses($event)"
+    [totalRecords]="totalRecord"
+    [loading]="false"
+    responsiveLayout="scroll"
   >
     <ng-template pTemplate="caption">
       <h3>
         Khoản mục chi phí
         <sup>
-          <p-badge value="{{ expenses.length }}"></p-badge>
+          <p-badge value="{{ totalRecord }}"></p-badge>
         </sup>
       </h3>
       <div class="flex gap-2">
-        <span class="p-input-icon-left p-input-icon-right mr-auto">
+        <span class="p-input-icon-left mr-auto">
           <i class="pi pi-search"></i>
           <input
             pInputText
             type="text"
-            (input)="filterExpenses(filter.value)"
+            (keydown.enter)="loadExpenses()"
             placeholder="Tìm kiếm"
-            #filter
+            [(ngModel)]="searchText"
           />
         </span>
         <button

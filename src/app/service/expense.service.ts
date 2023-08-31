@@ -22,11 +22,24 @@ export class ExpenseService {
     return this.http.post<any>(`${this.baseUrl}/search`, {});
   }
 
-  searchExpense(name?: string, accountNumber?: string) {
-    return this.http.post<any>(`${this.baseUrl}/search`, {
-      name: name,
-      accountNumber: accountNumber,
-    });
+  searchExpense(
+    searchText: string,
+    page: number,
+    size: number,
+    sorts?: string[]
+  ) {
+    const body: any = {
+      name: searchText,
+      accountNumber: searchText,
+      page: page,
+      size: size,
+    };
+
+    if (sorts && sorts.length > 0) {
+      body.sorts = sorts;
+    }
+
+    return this.http.post<any>(`${this.baseUrl}/search`, body);
   }
 
   createExpense(
@@ -62,7 +75,6 @@ export class ExpenseService {
       isDistributed: isDistributed,
       status: status,
     };
-    console.log(body);
     return this.http.put<any>(`${this.baseUrl}/update`, body);
   }
 

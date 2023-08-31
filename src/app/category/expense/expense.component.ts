@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
-import * as XLSX from 'xlsx';
+import { Table } from 'primeng/table';
 import { Expense, ExpenseService } from 'src/app/service/expense.service';
 
 @Component({
@@ -9,14 +9,22 @@ import { Expense, ExpenseService } from 'src/app/service/expense.service';
   styleUrls: ['./expense.component.scss'],
   providers: [MessageService, ConfirmationService],
 })
-export class ExpenseComponent implements OnInit {
+export class ExpenseComponent implements AfterViewInit {
   first: number = 0;
-  rows: number = 10;
   expenseDialog: boolean = false;
   formData: any;
   expenses!: Expense[];
   submitted: boolean = false;
-  statuses!: any[];
+  statuses = [
+    { label: 'Hoạt động', value: 2 },
+    { label: 'Tạm dừng', value: 1 },
+    { label: 'Không hoạt động', value: 0 },
+  ];
+  totalRecord = 0;
+  searchText = '';
+  loading = true;
+
+  @ViewChild('dt') tableRef!: Table;
 
   constructor(
     private expenseService: ExpenseService,
@@ -24,16 +32,37 @@ export class ExpenseComponent implements OnInit {
     private confirmationService: ConfirmationService
   ) {}
 
-  ngOnInit() {
-    this.expenseService
-      .getExpenses()
-      .subscribe((data) => (this.expenses = data.data));
+  ngAfterViewInit() {
+    this.loadExpenses();
+  }
 
-    this.statuses = [
-      { label: 'Hoạt động', value: 2 },
-      { label: 'Tạm dừng', value: 1 },
-      { label: 'Không hoạt động', value: 0 },
-    ];
+  loadExpenses(
+    event: any = { first: this.tableRef._first, rows: this.tableRef._rows }
+  ) {
+    this.loading = true;
+    let page = Math.floor(event.first / event.rows) + 1;
+    let size = event.rows;
+    let sorts: string[] = [];
+    let currentSort = this.getCurrentSort();
+    if (currentSort) {
+      sorts.push(currentSort);
+    }
+    this.expenseService
+      .searchExpense(this.searchText, page, size, sorts)
+      .subscribe((res) => {
+        this.expenses = res.data;
+        this.totalRecord = res.totalRecord;
+        this.loading = false;
+      });
+  }
+
+  getCurrentSort(): string {
+    let property = this.tableRef._sortField;
+    if (!property) {
+      return '';
+    }
+    let direction = this.tableRef._sortOrder === 1 ? 'ASC' : 'DESC';
+    return property + '-' + direction;
   }
 
   openNewDialog() {
@@ -67,6 +96,7 @@ export class ExpenseComponent implements OnInit {
     this.expenseDialog = false;
     this.submitted = false;
   }
+
   onBasicUploadAuto() {
     this.messageService.add({
       severity: 'info',
@@ -74,26 +104,25 @@ export class ExpenseComponent implements OnInit {
       detail: 'File Uploaded with Auto Mode',
     });
   }
+
   deleteExpense(expense: Expense) {
     this.confirmationService.confirm({
       message: 'Bạn có chắc chắn muốn xóa ' + expense.name + '?',
       header: 'Xác nhận',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.expenseService
-          .deleteExpense(expense.id)
-          .subscribe((data) => console.log(data));
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Expense Deleted',
-          life: 3000,
+        this.expenseService.deleteExpense(expense.id).subscribe((data) => {
+          console.log(data);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Successful',
+            detail: 'Expense Deleted',
+            life: 3000,
+          });
         });
 
         setTimeout(() => {
-          this.expenseService
-            .getExpenses()
-            .subscribe((data) => (this.expenses = data.data));
+          this.loadExpenses();
         }, 3000);
       },
     });
@@ -113,13 +142,15 @@ export class ExpenseComponent implements OnInit {
             this.formData.isDistributed,
             this.formData.status
           )
-          .subscribe((data) => console.log(data));
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Expense Updated',
-          life: 3000,
-        });
+          .subscribe((data) => {
+            console.log(data);
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Successful',
+              detail: 'Expense Updated',
+              life: 3000,
+            });
+          });
       } else {
         this.expenseService
           .createExpense(
@@ -129,60 +160,26 @@ export class ExpenseComponent implements OnInit {
             this.formData.isDistributed,
             this.formData.status
           )
-          .subscribe((data) => console.log(data));
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Expense Created',
-          life: 3000,
-        });
+          .subscribe((data) => {
+            console.log(data);
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Successful',
+              detail: 'Expense Created',
+              life: 3000,
+            });
+          });
       }
 
       this.expenseDialog = false;
       setTimeout(() => {
-        this.expenseService
-          .getExpenses()
-          .subscribe((data) => (this.expenses = data.data));
+        this.loadExpenses();
       }, 3000);
     }
   }
 
-  filterExpenses(str: string) {
-    this.expenseService
-      .searchExpense(str, str)
-      .subscribe((data) => (this.expenses = data.data));
-  }
-
   exportToExcel() {
-    const fileName = 'danh-sach-khoan-muc-chi-phi.xlsx';
-    const sheetName = 'Danh sách khoản mục chi phí';
-
-    const data: any[][] = [
-      [
-        '#',
-        'Khoản mục',
-        'Số tài khoản',
-        'Loại chi phí',
-        'Loại phân bổ',
-        'Trạng thái',
-      ],
-    ];
-
-    this.expenses.forEach((expense, index) => {
-      data.push([
-        index + 1,
-        expense.name,
-        expense.accountNumber,
-        expense.type,
-        expense.isDistributed,
-        this.getStatus(expense.status ? expense.status : 0),
-      ]);
-    });
-
-    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(data);
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, sheetName);
-    XLSX.writeFile(wb, fileName);
+    window.open(`${this.expenseService.baseUrl}/download`, '_self');
   }
 
   getStatus(trang_thai: number): string {
